@@ -31,16 +31,6 @@ struct ContactsView: View {
     
     var body: some View {
         NavigationView {
-//            VStack {
-//                SearchBar(text: $viewModel.searchString)
-//
-//                List(viewModel.filteredContacts) { contact in
-//                    SingleContactView(contact: contact)
-//
-//                }
-//                .listSeparatorStyle(.singleLine, color: nil, inset: EdgeInsets(top: 0, leading: 56, bottom: 0, trailing: 0))
-//                .animation(.default)
-//            }
             List {
                 SearchBar(text: $viewModel.searchString)
                     .padding(.horizontal, -16)
@@ -49,10 +39,13 @@ struct ContactsView: View {
                 }
             }
             .listSeparatorStyle(.none)
-//            .listStyle(DefaultListStyle())
             .navigationBarTitle("Contacts", displayMode: .inline)
-            
+            .edgesIgnoringSafeArea(.all)
         }
+        .alert(isPresented: $viewModel.isAllowedContactsAccess, content: {
+            Alert(title: Text("Access denied"), message: Text("Access to contacts is denied. Please, go to Settings -> Messager and allow access to contacts so that you could see, which of your contacts are registred in Messager"), dismissButton: .default(Text("Ok")))
+        })
+        
         
     }
 }

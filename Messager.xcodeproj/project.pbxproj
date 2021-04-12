@@ -9,6 +9,28 @@
 /* Begin PBXBuildFile section */
 		751EEB3425FA97050077E8A5 /* List+Separator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751EEB3325FA97050077E8A5 /* List+Separator.swift */; };
 		751EEB3825FA9A740077E8A5 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751EEB3725FA9A740077E8A5 /* SearchBar.swift */; };
+		752252C7261B8CB7001DA6AF /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752252C6261B8CB7001DA6AF /* UIViewController+Extensions.swift */; };
+		7531224B25FFF0E4004E59E5 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7531224A25FFF0E3004E59E5 /* View+Extensions.swift */; };
+		7531224F25FFF533004E59E5 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7531224E25FFF533004E59E5 /* AuthenticationViewController.swift */; };
+		7531226A25FFF5F5004E59E5 /* AuthenticationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7531226925FFF5F5004E59E5 /* AuthenticationViewController.storyboard */; };
+		753122AA25FFF966004E59E5 /* UserObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122A825FFF965004E59E5 /* UserObject.swift */; };
+		753122AB25FFF966004E59E5 /* CurrentUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122A925FFF965004E59E5 /* CurrentUserManager.swift */; };
+		753122BF25FFFA49004E59E5 /* FirestoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122B025FFFA45004E59E5 /* FirestoreError.swift */; };
+		753122C025FFFA49004E59E5 /* FirestoreService+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122B125FFFA45004E59E5 /* FirestoreService+User.swift */; };
+		753122C125FFFA49004E59E5 /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122B225FFFA45004E59E5 /* FirestoreService.swift */; };
+		753122C425FFFA49004E59E5 /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122B625FFFA46004E59E5 /* AuthenticationError.swift */; };
+		753122C525FFFA49004E59E5 /* FirebaseAuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122B725FFFA46004E59E5 /* FirebaseAuthenticationService.swift */; };
+		753122C725FFFA49004E59E5 /* PersistantStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122BA25FFFA48004E59E5 /* PersistantStoreService.swift */; };
+		753122C825FFFA49004E59E5 /* PersistantStoreService+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122BB25FFFA48004E59E5 /* PersistantStoreService+User.swift */; };
+		753122C925FFFA49004E59E5 /* PersistantStoreService+LaunchesCounting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122BC25FFFA48004E59E5 /* PersistantStoreService+LaunchesCounting.swift */; };
+		753122D325FFFAA9004E59E5 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122D025FFFAA9004E59E5 /* Property.swift */; };
+		753122D425FFFAA9004E59E5 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122D125FFFAA9004E59E5 /* Signal.swift */; };
+		753122D525FFFAA9004E59E5 /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753122D225FFFAA9004E59E5 /* Listener.swift */; };
+		754DAAF1261B815700F96D0A /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754DAAF0261B815700F96D0A /* BaseViewModel.swift */; };
+		754DAAF4261B819900F96D0A /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754DAAF3261B819900F96D0A /* BaseViewController.swift */; };
+		754DAB00261B83EC00F96D0A /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754DAAFF261B83EC00F96D0A /* UIView+Extension.swift */; };
+		754DAB04261B849900F96D0A /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754DAB03261B849900F96D0A /* AuthenticationViewModel.swift */; };
+		754DAB0A261B86BA00F96D0A /* PersistantStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754DAB09261B86BA00F96D0A /* PersistantStorage.swift */; };
 		7564E98A25E8090B003F4933 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564E98925E8090B003F4933 /* AppDelegate.swift */; };
 		7564E98C25E8090B003F4933 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564E98B25E8090B003F4933 /* SceneDelegate.swift */; };
 		7564E98E25E8090B003F4933 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7564E98D25E8090B003F4933 /* ViewController.swift */; };
@@ -41,6 +63,28 @@
 		6BAD0A6A91204E84DDFB3CD0 /* Pods-Messager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messager.debug.xcconfig"; path = "Target Support Files/Pods-Messager/Pods-Messager.debug.xcconfig"; sourceTree = "<group>"; };
 		751EEB3325FA97050077E8A5 /* List+Separator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "List+Separator.swift"; sourceTree = "<group>"; };
 		751EEB3725FA9A740077E8A5 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		752252C6261B8CB7001DA6AF /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		7531224A25FFF0E3004E59E5 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		7531224E25FFF533004E59E5 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
+		7531226925FFF5F5004E59E5 /* AuthenticationViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthenticationViewController.storyboard; sourceTree = "<group>"; };
+		753122A825FFF965004E59E5 /* UserObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserObject.swift; sourceTree = "<group>"; };
+		753122A925FFF965004E59E5 /* CurrentUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentUserManager.swift; sourceTree = "<group>"; };
+		753122B025FFFA45004E59E5 /* FirestoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreError.swift; sourceTree = "<group>"; };
+		753122B125FFFA45004E59E5 /* FirestoreService+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FirestoreService+User.swift"; sourceTree = "<group>"; };
+		753122B225FFFA45004E59E5 /* FirestoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		753122B625FFFA46004E59E5 /* AuthenticationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
+		753122B725FFFA46004E59E5 /* FirebaseAuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthenticationService.swift; sourceTree = "<group>"; };
+		753122BA25FFFA48004E59E5 /* PersistantStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistantStoreService.swift; sourceTree = "<group>"; };
+		753122BB25FFFA48004E59E5 /* PersistantStoreService+User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistantStoreService+User.swift"; sourceTree = "<group>"; };
+		753122BC25FFFA48004E59E5 /* PersistantStoreService+LaunchesCounting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistantStoreService+LaunchesCounting.swift"; sourceTree = "<group>"; };
+		753122D025FFFAA9004E59E5 /* Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		753122D125FFFAA9004E59E5 /* Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		753122D225FFFAA9004E59E5 /* Listener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
+		754DAAF0261B815700F96D0A /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		754DAAF3261B819900F96D0A /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		754DAAFF261B83EC00F96D0A /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		754DAB03261B849900F96D0A /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		754DAB09261B86BA00F96D0A /* PersistantStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistantStorage.swift; sourceTree = "<group>"; };
 		7564E98625E8090B003F4933 /* Messager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7564E98925E8090B003F4933 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7564E98B25E8090B003F4933 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,9 +127,104 @@
 		751EEB3625FA9A600077E8A5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				754DAAEF261B811300F96D0A /* BaseComponents */,
 				751EEB3725FA9A740077E8A5 /* SearchBar.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		7531224D25FFF4FF004E59E5 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				754DAB03261B849900F96D0A /* AuthenticationViewModel.swift */,
+				7531224E25FFF533004E59E5 /* AuthenticationViewController.swift */,
+				7531226925FFF5F5004E59E5 /* AuthenticationViewController.storyboard */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		753122A625FFF965004E59E5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				753122A725FFF965004E59E5 /* CurrentUserManager */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		753122A725FFF965004E59E5 /* CurrentUserManager */ = {
+			isa = PBXGroup;
+			children = (
+				753122A925FFF965004E59E5 /* CurrentUserManager.swift */,
+				753122A825FFF965004E59E5 /* UserObject.swift */,
+			);
+			path = CurrentUserManager;
+			sourceTree = "<group>";
+		};
+		753122AF25FFFA45004E59E5 /* FirestoreService */ = {
+			isa = PBXGroup;
+			children = (
+				753122B025FFFA45004E59E5 /* FirestoreError.swift */,
+				753122B125FFFA45004E59E5 /* FirestoreService+User.swift */,
+				753122B225FFFA45004E59E5 /* FirestoreService.swift */,
+			);
+			path = FirestoreService;
+			sourceTree = "<group>";
+		};
+		753122B525FFFA46004E59E5 /* FirebaseAuthenticationService */ = {
+			isa = PBXGroup;
+			children = (
+				753122B625FFFA46004E59E5 /* AuthenticationError.swift */,
+				753122B725FFFA46004E59E5 /* FirebaseAuthenticationService.swift */,
+			);
+			path = FirebaseAuthenticationService;
+			sourceTree = "<group>";
+		};
+		753122B925FFFA48004E59E5 /* PersistantStoreService */ = {
+			isa = PBXGroup;
+			children = (
+				753122BA25FFFA48004E59E5 /* PersistantStoreService.swift */,
+				753122BB25FFFA48004E59E5 /* PersistantStoreService+User.swift */,
+				753122BC25FFFA48004E59E5 /* PersistantStoreService+LaunchesCounting.swift */,
+			);
+			path = PersistantStoreService;
+			sourceTree = "<group>";
+		};
+		753122CF25FFFAA9004E59E5 /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+				753122D025FFFAA9004E59E5 /* Property.swift */,
+				753122D125FFFAA9004E59E5 /* Signal.swift */,
+				753122D225FFFAA9004E59E5 /* Listener.swift */,
+			);
+			path = Bindings;
+			sourceTree = "<group>";
+		};
+		754DAAEF261B811300F96D0A /* BaseComponents */ = {
+			isa = PBXGroup;
+			children = (
+				75E82E4525F675EA0058293D /* BaseRouter.swift */,
+				754DAAF0261B815700F96D0A /* BaseViewModel.swift */,
+				754DAAF3261B819900F96D0A /* BaseViewController.swift */,
+			);
+			path = BaseComponents;
+			sourceTree = "<group>";
+		};
+		754DAAF6261B822400F96D0A /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				756CEFAF25EE963E00B5EA93 /* TabBarRouter.swift */,
+				756CEFAC25EE95FB00B5EA93 /* TabBarController.swift */,
+				75E82E4D25F67A1D0058293D /* TabBarController.storyboard */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		754DAB08261B86AD00F96D0A /* PersistantStorage */ = {
+			isa = PBXGroup;
+			children = (
+				754DAB09261B86BA00F96D0A /* PersistantStorage.swift */,
+			);
+			path = PersistantStorage;
 			sourceTree = "<group>";
 		};
 		7564E97D25E8090B003F4933 = {
@@ -114,7 +253,9 @@
 				7564E98D25E8090B003F4933 /* ViewController.swift */,
 				7564E98F25E8090B003F4933 /* Main.storyboard */,
 				75E82E5325F67A990058293D /* Utilities */,
+				754DAB08261B86AD00F96D0A /* PersistantStorage */,
 				75E82E5D25F67E090058293D /* Services */,
+				753122A625FFF965004E59E5 /* Managers */,
 				7564E9B725E8136A003F4933 /* Modules */,
 				7564E99225E8090F003F4933 /* Assets.xcassets */,
 				7564E99425E8090F003F4933 /* LaunchScreen.storyboard */,
@@ -127,12 +268,10 @@
 		7564E9B725E8136A003F4933 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				75E82E4525F675EA0058293D /* BaseRouter.swift */,
 				751EEB3625FA9A600077E8A5 /* Common */,
 				75E82E4825F6796A0058293D /* Extensions */,
-				756CEFAF25EE963E00B5EA93 /* TabBarRouter.swift */,
-				756CEFAC25EE95FB00B5EA93 /* TabBarController.swift */,
-				75E82E4D25F67A1D0058293D /* TabBarController.storyboard */,
+				754DAAF6261B822400F96D0A /* TabBar */,
+				7531224D25FFF4FF004E59E5 /* Authentication */,
 				756CEFB225EE966800B5EA93 /* Profile */,
 				756CEFB625EE972000B5EA93 /* Contacts */,
 			);
@@ -164,8 +303,11 @@
 			isa = PBXGroup;
 			children = (
 				75E82E4925F679710058293D /* UINavigationController+Completion.swift */,
+				752252C6261B8CB7001DA6AF /* UIViewController+Extensions.swift */,
 				75E82E5025F67A7E0058293D /* UIStoryboard+Extensions.swift */,
 				751EEB3325FA97050077E8A5 /* List+Separator.swift */,
+				754DAAFF261B83EC00F96D0A /* UIView+Extension.swift */,
+				7531224A25FFF0E3004E59E5 /* View+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -175,6 +317,7 @@
 			children = (
 				75E82E5425F67AA50058293D /* NameDescribable.swift */,
 				75E82E6225F684000058293D /* String+Extensions.swift */,
+				753122CF25FFFAA9004E59E5 /* Bindings */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -190,6 +333,9 @@
 		75E82E5D25F67E090058293D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				753122B525FFFA46004E59E5 /* FirebaseAuthenticationService */,
+				753122AF25FFFA45004E59E5 /* FirestoreService */,
+				753122B925FFFA48004E59E5 /* PersistantStoreService */,
 				75E82E5E25F67E160058293D /* ContactsService.swift */,
 			);
 			path = Services;
@@ -272,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7564E99625E8090F003F4933 /* LaunchScreen.storyboard in Resources */,
+				7531226A25FFF5F5004E59E5 /* AuthenticationViewController.storyboard in Resources */,
 				7564E99F25E80BC0003F4933 /* GoogleService-Info.plist in Resources */,
 				75E82E4E25F67A1D0058293D /* TabBarController.storyboard in Resources */,
 				7564E99325E8090F003F4933 /* Assets.xcassets in Resources */,
@@ -328,23 +475,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				754DAB04261B849900F96D0A /* AuthenticationViewModel.swift in Sources */,
+				753122AB25FFF966004E59E5 /* CurrentUserManager.swift in Sources */,
+				753122C825FFFA49004E59E5 /* PersistantStoreService+User.swift in Sources */,
 				751EEB3425FA97050077E8A5 /* List+Separator.swift in Sources */,
+				754DAB0A261B86BA00F96D0A /* PersistantStorage.swift in Sources */,
 				75E82E5525F67AA50058293D /* NameDescribable.swift in Sources */,
+				753122D525FFFAA9004E59E5 /* Listener.swift in Sources */,
+				754DAAF1261B815700F96D0A /* BaseViewModel.swift in Sources */,
 				756CEFBB25EE983100B5EA93 /* ProfileView.swift in Sources */,
+				753122AA25FFF966004E59E5 /* UserObject.swift in Sources */,
 				756CEFB425EE96B800B5EA93 /* ProfileRouter.swift in Sources */,
 				7564E98E25E8090B003F4933 /* ViewController.swift in Sources */,
+				753122BF25FFFA49004E59E5 /* FirestoreError.swift in Sources */,
+				754DAAF4261B819900F96D0A /* BaseViewController.swift in Sources */,
+				754DAB00261B83EC00F96D0A /* UIView+Extension.swift in Sources */,
 				75E82E6325F684000058293D /* String+Extensions.swift in Sources */,
+				753122C725FFFA49004E59E5 /* PersistantStoreService.swift in Sources */,
+				7531224F25FFF533004E59E5 /* AuthenticationViewController.swift in Sources */,
+				753122C025FFFA49004E59E5 /* FirestoreService+User.swift in Sources */,
+				753122D425FFFAA9004E59E5 /* Signal.swift in Sources */,
+				753122C425FFFA49004E59E5 /* AuthenticationError.swift in Sources */,
 				75E82E5B25F67DE30058293D /* ContactModel.swift in Sources */,
 				75E82E5F25F67E160058293D /* ContactsService.swift in Sources */,
+				753122C525FFFA49004E59E5 /* FirebaseAuthenticationService.swift in Sources */,
 				75E0B3D025EEB6D50028F50B /* ProfileViewModel.swift in Sources */,
 				75E82E4A25F679710058293D /* UINavigationController+Completion.swift in Sources */,
+				7531224B25FFF0E4004E59E5 /* View+Extensions.swift in Sources */,
 				756CEFB825EE972E00B5EA93 /* ContactsRouter.swift in Sources */,
 				75E82E5125F67A7E0058293D /* UIStoryboard+Extensions.swift in Sources */,
 				756CEFAD25EE95FB00B5EA93 /* TabBarController.swift in Sources */,
+				752252C7261B8CB7001DA6AF /* UIViewController+Extensions.swift in Sources */,
 				75E82E6625F684700058293D /* ContactsViewModel.swift in Sources */,
+				753122D325FFFAA9004E59E5 /* Property.swift in Sources */,
+				753122C125FFFA49004E59E5 /* FirestoreService.swift in Sources */,
 				7564E98A25E8090B003F4933 /* AppDelegate.swift in Sources */,
 				75E82E4625F675EA0058293D /* BaseRouter.swift in Sources */,
 				75E82E6925F6875A0058293D /* ContactsView.swift in Sources */,
+				753122C925FFFA49004E59E5 /* PersistantStoreService+LaunchesCounting.swift in Sources */,
 				751EEB3825FA9A740077E8A5 /* SearchBar.swift in Sources */,
 				7564E98C25E8090B003F4933 /* SceneDelegate.swift in Sources */,
 				756CEFB025EE963E00B5EA93 /* TabBarRouter.swift in Sources */,

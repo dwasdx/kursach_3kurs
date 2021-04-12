@@ -41,7 +41,7 @@ final class ContactsViewModel: ObservableObject {
         contacts.sorted(by: { $0.name < $1.name })
     }
     @Published var filteredContacts: [ContactModel]
-    @Published var isAllowedContactsAccess = true
+    @Published var isAllowedContactsAccess = false
     @Published var searchString = "" {
         didSet {
             filterContacts(forString: searchString)
@@ -57,18 +57,25 @@ final class ContactsViewModel: ObservableObject {
         self.contactsService = contactsService
         filteredContacts = []
         filteredContacts = contactsSorted
-//        fetchContacts()
+        fetchContacts()
+    }
+    
+    private func setFilteredContacts(_ contacts: [ContactModel]) {
+        DispatchQueue.main.async { [weak self] in
+            self?.filteredContacts = contacts
+        }
     }
     
     private func filterContacts(forString string: String) {
         if string.isEmpty {
-            filteredContacts = contactsSorted
+            setFilteredContacts(contactsSorted)
             return
         }
         let filteredArray = contacts.filter { (contact) -> Bool in
             contact.name.lowercased().contains(string.lowercased()) || contact.phoneNumber.decimalString.contains(string.decimalString)
         }
-        filteredContacts = filteredArray.sorted(by: { $0.name < $1.name })
+        let sorted = filteredArray.sorted(by: { $0.name < $1.name })
+        setFilteredContacts(sorted)
     }
     
     private func fetchContacts() {
@@ -82,6 +89,7 @@ final class ContactsViewModel: ObservableObject {
                     return
                 }
                 do {
+                    self.contacts.removeAll()
                     try self.contactsService.iterateAllContacts { (contact, stop) in
                         let name = self.contactsService.getFullName(for: contact) ?? "N/A"
                         let phoneNumber = contact.phoneNumbers.first?.value.stringValue ?? ""
@@ -92,7 +100,7 @@ final class ContactsViewModel: ObservableObject {
                     }
                     
                 } catch {
-                    self.isAllowedContactsAccess = false
+                    self.isAllowedContactsAccess = true
                 }
             }
     }
