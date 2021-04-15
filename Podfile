@@ -9,6 +9,7 @@ target 'Messager' do
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'PhoneNumberKit'
+  pod 'MessageKit'
   # Pods for Messager
 
 end

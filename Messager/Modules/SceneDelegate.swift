@@ -20,8 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let router = TabBarRouter()
 //        let vc = router.tabBar
         let vc = AuthenticationViewController.initFromItsStoryboard()
+        let router = AuthenticationRouter()
+        vc.router = router
+        router.viewController = vc
         vc.viewModel = AuthenticationViewModel()
-        window?.rootViewController = vc
+        let navVc = UINavigationController(rootViewController: vc)
+        navVc.setNavigationBarHidden(true, animated: false)
+        window?.rootViewController = navVc
         window?.makeKeyAndVisible()
     }
 

@@ -69,6 +69,9 @@
                                             <action selector="loginButtonTapped" destination="14y-ul-ZgJ" eventType="touchUpInside" id="lKy-eT-hJ0"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uMw-VA-q8w">
+                                        <rect key="frame" x="150" y="291" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -81,12 +84,14 @@
                                     <constraint firstAttribute="bottom" secondItem="n3G-Pb-aWA" secondAttribute="bottom" constant="3" id="PRw-or-YBa"/>
                                     <constraint firstItem="n3G-Pb-aWA" firstAttribute="leading" secondItem="A4Z-gd-eOf" secondAttribute="leading" constant="20" id="XTb-9L-ERH"/>
                                     <constraint firstItem="Zd4-X9-IBt" firstAttribute="top" secondItem="N2u-1f-b6Y" secondAttribute="bottom" constant="24" id="YPl-XX-S0S"/>
+                                    <constraint firstItem="uMw-VA-q8w" firstAttribute="centerX" secondItem="n3G-Pb-aWA" secondAttribute="centerX" id="ZIa-sf-9GE"/>
                                     <constraint firstItem="9oT-Hf-pmd" firstAttribute="trailing" secondItem="QaZ-Ng-syT" secondAttribute="trailing" id="d69-aZ-sWE"/>
                                     <constraint firstItem="N2u-1f-b6Y" firstAttribute="leading" secondItem="A4Z-gd-eOf" secondAttribute="leading" constant="20" id="lSm-GJ-Tal"/>
                                     <constraint firstAttribute="trailing" secondItem="QaZ-Ng-syT" secondAttribute="trailing" constant="20" id="rdM-9V-Hj1"/>
                                     <constraint firstAttribute="trailing" secondItem="n3G-Pb-aWA" secondAttribute="trailing" constant="20" id="tpW-Pj-sdV"/>
                                     <constraint firstAttribute="trailing" secondItem="N2u-1f-b6Y" secondAttribute="trailing" constant="20" id="txu-sJ-2Ag"/>
                                     <constraint firstItem="QaZ-Ng-syT" firstAttribute="top" secondItem="Zd4-X9-IBt" secondAttribute="bottom" constant="50" id="uCt-T4-JzK"/>
+                                    <constraint firstItem="uMw-VA-q8w" firstAttribute="centerY" secondItem="n3G-Pb-aWA" secondAttribute="centerY" id="wZB-Ph-hYK"/>
                                     <constraint firstAttribute="trailing" secondItem="Zd4-X9-IBt" secondAttribute="trailing" constant="20" id="xWs-3F-VVk"/>
                                 </constraints>
                             </view>
@@ -103,6 +108,7 @@
                         <outlet property="containerView" destination="A4Z-gd-eOf" id="hw2-ZJ-Tsy"/>
                         <outlet property="distanceAnchor" destination="CY9-cw-YLW" id="WOL-Zv-6kv"/>
                         <outlet property="emailTextField" destination="QaZ-Ng-syT" id="Wt7-l1-xaL"/>
+                        <outlet property="loadingIndicator" destination="uMw-VA-q8w" id="CRr-52-JKV"/>
                         <outlet property="loginButton" destination="n3G-Pb-aWA" id="CbF-mN-4wp"/>
                     </connections>
                 </viewController>

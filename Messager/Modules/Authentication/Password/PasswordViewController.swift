@@ -1,37 +1,42 @@
 //
-//  AuthenticationViewController.swift
+//  PasswordViewController.swift
 //  Messager
 //
-//  Created by Андрей Журавлев on 15.03.2021.
+//  Created by Андрей Журавлев on 12.04.2021.
 //
 
 import UIKit
-import PhoneNumberKit
 
-protocol AuthenticationRouting {
-    func presentContinueAsScreen(_ completion: (() -> Void)?)
+protocol PasswordRouting {
+    func openTabBarScreen()
+    func openCreateProfileScreen()
 }
 
-protocol AuthenticationViewModeling: BaseViewModeling {
-    var email: String? { get set }
-
-    func login(_ completion: ((String?) -> Void)?)
+protocol PasswordViewModeling: BaseViewModeling {
+    var password: String? { get set }
+    
+    func login(_ completion: ((Bool, String?) -> Void)?)
 }
 
-class AuthenticationViewController: BaseViewController {
+class PasswordViewController: BaseViewController {
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var distanceAnchor: NSLayoutConstraint!
     
-    private let loginButtonDefaultOffset: CGFloat = -30
+    private let loginButtonDefaultOffset: CGFloat = -50
     
-    var router: AuthenticationRouting?
-    var viewModel: AuthenticationViewModeling! {
+    var router: PasswordRouting?
+    var viewModel: PasswordViewModeling! {
         didSet {
             viewModel.didChange = { [weak self] in
                 self?.update()
+            }
+            viewModel.didGetError = { [weak self] (message) in
+                self?.showErrorAlert(message: message)
             }
         }
     }
@@ -53,55 +58,38 @@ class AuthenticationViewController: BaseViewController {
     }
     
     private func configureUI() {
-        emailTextField.delegate = self
         
-        loginButton.setTitleColor(.white, for: .normal)
-        loginButton.setTitleColor(UIColor.white.withAlphaComponent(0.8), for: .disabled)
     }
     
     private func update() {
         guard isViewLoaded else {
             return
         }
-        updateLoginButton()
     }
     
-    private func updateLoginButton() {
-        let isEmptyLogin = viewModel.email?.isEmpty ?? true
-        loginButton.isEnabled = !isEmptyLogin
-        let color: UIColor = isEmptyLogin ? .gray : .systemBlue
-        loginButton.backgroundColor = color
-    }
-    
-    @IBAction func loginButtonTapped() {
-        viewModel.login { (errorMessage) in
-            if let message = errorMessage {
-                self.showErrorAlert(message: message)
+    @IBAction func onContinue() {
+        viewModel.login { [weak self] (isProfileFilled, errorMessage) in
+            if let error = errorMessage {
+                self?.showErrorAlert(message: error)
+                return
             }
+            isProfileFilled ? self?.router?.openTabBarScreen() : self?.router?.openCreateProfileScreen()
         }
     }
     
-    @IBAction func textFieldEditingChanged(_ textFIeld: UITextField) {
-        viewModel.email = textFIeld.text
+    @IBAction func onPasswordChanged(sender: UITextField) {
+        viewModel.password = sender.text
     }
 }
 
-extension AuthenticationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        !(textField.text ?? "").isEmpty
-    }
-    
-    
-}
-
-extension AuthenticationViewController {
+extension PasswordViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
             return
         }
         let containerViewMaxYCoord = containerView.frame.maxY
-        let keyboardUpperYCoord = view.frame.height - keyboardFrame.height
+        let keyboardUpperYCoord = view.frame.height - keyboardFrame.height - 10
         if keyboardUpperYCoord < containerViewMaxYCoord {
             distanceAnchor.constant += keyboardUpperYCoord - containerViewMaxYCoord
             UIView.animate(withDuration: 0.2,
@@ -109,7 +97,7 @@ extension AuthenticationViewController {
                            options: .curveEaseOut) {
                 self.view.layoutIfNeeded()
             }
-            
+
         }
     }
     

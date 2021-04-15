@@ -26,6 +26,6 @@ class AuthenticationViewModel: BaseViewModel {
 extension AuthenticationViewModel: AuthenticationViewModeling {
     
     func login(_ completion: ((String?) -> Void)?) {
-        
+        completion?(nil)
     }
 }

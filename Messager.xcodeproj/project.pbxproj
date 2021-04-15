@@ -43,6 +43,19 @@
 		756CEFB425EE96B800B5EA93 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CEFB325EE96B800B5EA93 /* ProfileRouter.swift */; };
 		756CEFB825EE972E00B5EA93 /* ContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CEFB725EE972E00B5EA93 /* ContactsRouter.swift */; };
 		756CEFBB25EE983100B5EA93 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CEFBA25EE983100B5EA93 /* ProfileView.swift */; };
+		759BF185262734CB003D8FAE /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF184262734CB003D8FAE /* CreateProfileViewController.swift */; };
+		759BF189262734E1003D8FAE /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF188262734E1003D8FAE /* CreateProfileViewModel.swift */; };
+		759BF18C262734E6003D8FAE /* CreateProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF18B262734E6003D8FAE /* CreateProfileRouter.swift */; };
+		759BF18F262734F1003D8FAE /* CreateProfileViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 759BF18E262734F1003D8FAE /* CreateProfileViewController.storyboard */; };
+		759BF193262834DB003D8FAE /* ChatRoomsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF192262834DB003D8FAE /* ChatRoomsListViewController.swift */; };
+		759BF1962628355F003D8FAE /* ChatRoomsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF1952628355F003D8FAE /* ChatRoomsListViewModel.swift */; };
+		759BF19926283565003D8FAE /* ChatRoomsListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF19826283565003D8FAE /* ChatRoomsListRouter.swift */; };
+		759BF19C262835AD003D8FAE /* ChatRoomsListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 759BF19B262835AD003D8FAE /* ChatRoomsListViewController.storyboard */; };
+		75A9F5F52624673600A9680F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F5F42624673600A9680F /* PasswordViewController.swift */; };
+		75A9F5F82624678600A9680F /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F5F72624678600A9680F /* PasswordViewModel.swift */; };
+		75A9F5FB2624679600A9680F /* PasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A9F5FA2624679600A9680F /* PasswordViewController.storyboard */; };
+		75A9F5FE262467A000A9680F /* PasswordRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F5FD262467A000A9680F /* PasswordRouter.swift */; };
+		75A9F602262467AF00A9680F /* AuthenticationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F601262467AF00A9680F /* AuthenticationRouter.swift */; };
 		75E0B3D025EEB6D50028F50B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E0B3CF25EEB6D50028F50B /* ProfileViewModel.swift */; };
 		75E82E4625F675EA0058293D /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E82E4525F675EA0058293D /* BaseRouter.swift */; };
 		75E82E4A25F679710058293D /* UINavigationController+Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E82E4925F679710058293D /* UINavigationController+Completion.swift */; };
@@ -99,6 +112,19 @@
 		756CEFB325EE96B800B5EA93 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		756CEFB725EE972E00B5EA93 /* ContactsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsRouter.swift; sourceTree = "<group>"; };
 		756CEFBA25EE983100B5EA93 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		759BF184262734CB003D8FAE /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		759BF188262734E1003D8FAE /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
+		759BF18B262734E6003D8FAE /* CreateProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileRouter.swift; sourceTree = "<group>"; };
+		759BF18E262734F1003D8FAE /* CreateProfileViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateProfileViewController.storyboard; sourceTree = "<group>"; };
+		759BF192262834DB003D8FAE /* ChatRoomsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomsListViewController.swift; sourceTree = "<group>"; };
+		759BF1952628355F003D8FAE /* ChatRoomsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomsListViewModel.swift; sourceTree = "<group>"; };
+		759BF19826283565003D8FAE /* ChatRoomsListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomsListRouter.swift; sourceTree = "<group>"; };
+		759BF19B262835AD003D8FAE /* ChatRoomsListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatRoomsListViewController.storyboard; sourceTree = "<group>"; };
+		75A9F5F42624673600A9680F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		75A9F5F72624678600A9680F /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		75A9F5FA2624679600A9680F /* PasswordViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordViewController.storyboard; sourceTree = "<group>"; };
+		75A9F5FD262467A000A9680F /* PasswordRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRouter.swift; sourceTree = "<group>"; };
+		75A9F601262467AF00A9680F /* AuthenticationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationRouter.swift; sourceTree = "<group>"; };
 		75E0B3CF25EEB6D50028F50B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		75E82E4525F675EA0058293D /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
 		75E82E4925F679710058293D /* UINavigationController+Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Completion.swift"; sourceTree = "<group>"; };
@@ -136,9 +162,9 @@
 		7531224D25FFF4FF004E59E5 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				754DAB03261B849900F96D0A /* AuthenticationViewModel.swift */,
-				7531224E25FFF533004E59E5 /* AuthenticationViewController.swift */,
-				7531226925FFF5F5004E59E5 /* AuthenticationViewController.storyboard */,
+				75A9F5F1262466C200A9680F /* Email */,
+				75A9F5F2262466D200A9680F /* Password */,
+				759BF1832627349C003D8FAE /* CreateProfile */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -248,8 +274,6 @@
 		7564E98825E8090B003F4933 /* Messager */ = {
 			isa = PBXGroup;
 			children = (
-				7564E98925E8090B003F4933 /* AppDelegate.swift */,
-				7564E98B25E8090B003F4933 /* SceneDelegate.swift */,
 				7564E98D25E8090B003F4933 /* ViewController.swift */,
 				7564E98F25E8090B003F4933 /* Main.storyboard */,
 				75E82E5325F67A990058293D /* Utilities */,
@@ -268,12 +292,15 @@
 		7564E9B725E8136A003F4933 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				7564E98925E8090B003F4933 /* AppDelegate.swift */,
+				7564E98B25E8090B003F4933 /* SceneDelegate.swift */,
 				751EEB3625FA9A600077E8A5 /* Common */,
 				75E82E4825F6796A0058293D /* Extensions */,
-				754DAAF6261B822400F96D0A /* TabBar */,
 				7531224D25FFF4FF004E59E5 /* Authentication */,
+				754DAAF6261B822400F96D0A /* TabBar */,
 				756CEFB225EE966800B5EA93 /* Profile */,
 				756CEFB625EE972000B5EA93 /* Contacts */,
+				759BF191262834B6003D8FAE /* ChatRoomsList */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -297,6 +324,50 @@
 				75E82E6525F684700058293D /* ContactsViewModel.swift */,
 			);
 			path = Contacts;
+			sourceTree = "<group>";
+		};
+		759BF1832627349C003D8FAE /* CreateProfile */ = {
+			isa = PBXGroup;
+			children = (
+				759BF18B262734E6003D8FAE /* CreateProfileRouter.swift */,
+				759BF188262734E1003D8FAE /* CreateProfileViewModel.swift */,
+				759BF184262734CB003D8FAE /* CreateProfileViewController.swift */,
+				759BF18E262734F1003D8FAE /* CreateProfileViewController.storyboard */,
+			);
+			path = CreateProfile;
+			sourceTree = "<group>";
+		};
+		759BF191262834B6003D8FAE /* ChatRoomsList */ = {
+			isa = PBXGroup;
+			children = (
+				759BF19826283565003D8FAE /* ChatRoomsListRouter.swift */,
+				759BF1952628355F003D8FAE /* ChatRoomsListViewModel.swift */,
+				759BF192262834DB003D8FAE /* ChatRoomsListViewController.swift */,
+				759BF19B262835AD003D8FAE /* ChatRoomsListViewController.storyboard */,
+			);
+			path = ChatRoomsList;
+			sourceTree = "<group>";
+		};
+		75A9F5F1262466C200A9680F /* Email */ = {
+			isa = PBXGroup;
+			children = (
+				75A9F601262467AF00A9680F /* AuthenticationRouter.swift */,
+				754DAB03261B849900F96D0A /* AuthenticationViewModel.swift */,
+				7531224E25FFF533004E59E5 /* AuthenticationViewController.swift */,
+				7531226925FFF5F5004E59E5 /* AuthenticationViewController.storyboard */,
+			);
+			path = Email;
+			sourceTree = "<group>";
+		};
+		75A9F5F2262466D200A9680F /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				75A9F5FD262467A000A9680F /* PasswordRouter.swift */,
+				75A9F5F72624678600A9680F /* PasswordViewModel.swift */,
+				75A9F5F42624673600A9680F /* PasswordViewController.swift */,
+				75A9F5FA2624679600A9680F /* PasswordViewController.storyboard */,
+			);
+			path = Password;
 			sourceTree = "<group>";
 		};
 		75E82E4825F6796A0058293D /* Extensions */ = {
@@ -417,10 +488,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				759BF19C262835AD003D8FAE /* ChatRoomsListViewController.storyboard in Resources */,
 				7564E99625E8090F003F4933 /* LaunchScreen.storyboard in Resources */,
+				759BF18F262734F1003D8FAE /* CreateProfileViewController.storyboard in Resources */,
 				7531226A25FFF5F5004E59E5 /* AuthenticationViewController.storyboard in Resources */,
 				7564E99F25E80BC0003F4933 /* GoogleService-Info.plist in Resources */,
 				75E82E4E25F67A1D0058293D /* TabBarController.storyboard in Resources */,
+				75A9F5FB2624679600A9680F /* PasswordViewController.storyboard in Resources */,
 				7564E99325E8090F003F4933 /* Assets.xcassets in Resources */,
 				7564E99125E8090B003F4933 /* Main.storyboard in Resources */,
 			);
@@ -483,28 +557,38 @@
 				75E82E5525F67AA50058293D /* NameDescribable.swift in Sources */,
 				753122D525FFFAA9004E59E5 /* Listener.swift in Sources */,
 				754DAAF1261B815700F96D0A /* BaseViewModel.swift in Sources */,
+				759BF185262734CB003D8FAE /* CreateProfileViewController.swift in Sources */,
 				756CEFBB25EE983100B5EA93 /* ProfileView.swift in Sources */,
+				759BF18C262734E6003D8FAE /* CreateProfileRouter.swift in Sources */,
 				753122AA25FFF966004E59E5 /* UserObject.swift in Sources */,
 				756CEFB425EE96B800B5EA93 /* ProfileRouter.swift in Sources */,
+				759BF19926283565003D8FAE /* ChatRoomsListRouter.swift in Sources */,
 				7564E98E25E8090B003F4933 /* ViewController.swift in Sources */,
 				753122BF25FFFA49004E59E5 /* FirestoreError.swift in Sources */,
+				759BF193262834DB003D8FAE /* ChatRoomsListViewController.swift in Sources */,
 				754DAAF4261B819900F96D0A /* BaseViewController.swift in Sources */,
 				754DAB00261B83EC00F96D0A /* UIView+Extension.swift in Sources */,
 				75E82E6325F684000058293D /* String+Extensions.swift in Sources */,
 				753122C725FFFA49004E59E5 /* PersistantStoreService.swift in Sources */,
+				75A9F5F52624673600A9680F /* PasswordViewController.swift in Sources */,
 				7531224F25FFF533004E59E5 /* AuthenticationViewController.swift in Sources */,
+				759BF189262734E1003D8FAE /* CreateProfileViewModel.swift in Sources */,
 				753122C025FFFA49004E59E5 /* FirestoreService+User.swift in Sources */,
 				753122D425FFFAA9004E59E5 /* Signal.swift in Sources */,
+				759BF1962628355F003D8FAE /* ChatRoomsListViewModel.swift in Sources */,
 				753122C425FFFA49004E59E5 /* AuthenticationError.swift in Sources */,
 				75E82E5B25F67DE30058293D /* ContactModel.swift in Sources */,
 				75E82E5F25F67E160058293D /* ContactsService.swift in Sources */,
 				753122C525FFFA49004E59E5 /* FirebaseAuthenticationService.swift in Sources */,
 				75E0B3D025EEB6D50028F50B /* ProfileViewModel.swift in Sources */,
 				75E82E4A25F679710058293D /* UINavigationController+Completion.swift in Sources */,
+				75A9F5FE262467A000A9680F /* PasswordRouter.swift in Sources */,
 				7531224B25FFF0E4004E59E5 /* View+Extensions.swift in Sources */,
 				756CEFB825EE972E00B5EA93 /* ContactsRouter.swift in Sources */,
 				75E82E5125F67A7E0058293D /* UIStoryboard+Extensions.swift in Sources */,
 				756CEFAD25EE95FB00B5EA93 /* TabBarController.swift in Sources */,
+				75A9F602262467AF00A9680F /* AuthenticationRouter.swift in Sources */,
+				75A9F5F82624678600A9680F /* PasswordViewModel.swift in Sources */,
 				752252C7261B8CB7001DA6AF /* UIViewController+Extensions.swift in Sources */,
 				75E82E6625F684700058293D /* ContactsViewModel.swift in Sources */,
 				753122D325FFFAA9004E59E5 /* Property.swift in Sources */,
