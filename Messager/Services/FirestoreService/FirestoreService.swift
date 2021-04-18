@@ -17,8 +17,13 @@ struct FirestorePathKeys {
 final class FirestoreService {
     
     static let shared = FirestoreService()
-    private init() {
-        
+    
+    let authenticationService: FirebaseAuthenticationServiceable
+    
+    private init(
+        authenticationService: FirebaseAuthenticationServiceable = FirebaseAuthenticationService.shared
+    ) {
+        self.authenticationService = authenticationService
     }
     
     deinit {

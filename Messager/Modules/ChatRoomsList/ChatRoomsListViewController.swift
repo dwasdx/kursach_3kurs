@@ -7,8 +7,8 @@
 
 import UIKit
 
-protocol ChatRoomsListRouting {
-    
+protocol ChatRoomsListRouting: BaseRouting {
+    func presentChatRoomsListScreen()
 }
 
 protocol ChatRoomsListViewModeling: BaseViewModeling {

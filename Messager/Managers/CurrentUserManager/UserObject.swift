@@ -10,40 +10,54 @@ import Foundation
 import Firebase
 
 struct UserObject: Codable {
-    internal init(name: String, id: String, email: String?) {
-        self.name = name
-        self.id = id
-        self.email = email
+    var id: String
+    var name: String?
+    var nickname: String?
+    var email: String?
+    var userInfo: String?
+    var phoneNumber: String?
+    var imageUrl: String?
+    
+    var isFilled: Bool {
+        name != nil && nickname != nil
     }
     
-    var name: String
-    var id: String
-    let email: String?
+    enum CodingKeys: CodingKey {
+        case id, name, nickname, email, userInfo, phoneNumber, imageUrl
+    }
     
-    var dictionaryRepresentation: [String: Any] {
-        [
-            "name": name,
-            "email": email as Any,
-            "id": id,
-        ]
+    init(id: String,
+         name: String?,
+         nickname: String?,
+         email: String?,
+         userInfo: String?,
+         phoneNumber: String?,
+         imageUrl: String?) {
+        self.id = id
+        self.name = name
+        self.nickname = nickname
+        self.email = email
+        self.userInfo = userInfo
+        self.phoneNumber = phoneNumber
+        self.imageUrl = imageUrl
     }
     
     init(firebaseUser: User) {
-        self.name = firebaseUser.displayName ?? "Not given"
         self.id = firebaseUser.uid
+        self.name = firebaseUser.displayName
+        self.nickname = ""
         self.email = firebaseUser.email
+        self.userInfo = nil
+        self.phoneNumber = nil
+        self.imageUrl = nil
     }
     
-    init?(document: DocumentSnapshot) {
-        let data = document.data()
-        guard let name = data?["name"] as? String,
-              let id = data?["id"] as? String,
-              let email = data?["email"] as? String else {
-            return nil
-        }
-        self.name = name
-        self.id = id
-        self.email = email
+    mutating func setUserProfileInfo(info: UserProfileModel) {
+        self.name = info.name
+        self.nickname = info.nickname
+        self.userInfo = info.userInfo
+        self.phoneNumber = info.phoneNumber?.decimalString
+        self.imageUrl = info.avatarUrl
     }
     
 }

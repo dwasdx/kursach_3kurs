@@ -10,11 +10,16 @@ import Foundation
 import Firebase
 
 typealias UserResultResponse = (Result<UserObject?, Error>) -> Void
+typealias SimpleErrorResponse = (_ errorMessage: Error?) -> Void
+typealias BoolResultResponse = (Result<Bool, Error>) -> Void
 
 protocol FirestoreUserServiceable {
-    func addUser(_ user: UserObject, completion: @escaping ((_ errorMessage: Error?) -> Void))
+    func isUserWithEmailExist(_ email: String, completion: @escaping UserResultResponse)
+    func isUserWithNicknameExist(_ nickname: String, completion: @escaping BoolResultResponse)
+    func addUser(_ user: UserObject, completion: @escaping SimpleErrorResponse)
     func updateUsername(userId: String, _ userName: String, completion: @escaping UserResultResponse)
     func getUserFromDataBase(userId: String, completion: @escaping UserResultResponse)
+    func setUserProfileInfo(info: UserProfileModel, completion: @escaping SimpleErrorResponse)
 }
 
 extension FirestoreService: FirestoreUserServiceable {
@@ -23,11 +28,13 @@ extension FirestoreService: FirestoreUserServiceable {
         return firestore.collection(FirestorePathKeys.users)
     }
     
-    func addUser(_ user: UserObject, completion: @escaping ((Error?) -> Void)) {
+    func addUser(_ user: UserObject, completion: @escaping SimpleErrorResponse) {
         let usersRef = self.usersRef
-        usersRef.document(user.id).setData(user.dictionaryRepresentation) { (error) in
-            completion(error)
+        guard let json = try? user.asDictionary() else {
+            completion(FirestoreError.wrongObjectFormat)
+            return
         }
+        usersRef.document(user.id).setData(json, completion: completion)
     }
     
     func updateUsername(userId: String, _ userName: String, completion: @escaping UserResultResponse) {
@@ -49,12 +56,16 @@ extension FirestoreService: FirestoreUserServiceable {
                     completion(.success(nil))
                 }
                 guard let snapshot = snapshot,
-                      var currentData = UserObject(document: snapshot) else {
+                      var currentData = try? UserObject(jsonDictionary: snapshot.data() ?? [:]) else {
                     completion(.failure(FirestoreError.badData))
                     return
                 }
                 currentData.name = userName
-                docRef.setData(currentData.dictionaryRepresentation) { (error) in
+                guard let json = try? currentData.asDictionary() else {
+                    completion(.failure(FirestoreError.wrongObjectFormat))
+                    return
+                }
+                docRef.setData(json) { (error) in
                     if let error = error {
                         completion(.failure(error))
                         return
@@ -64,6 +75,39 @@ extension FirestoreService: FirestoreUserServiceable {
             }
         })
         
+    }
+    
+    func isUserWithEmailExist(_ email: String, completion: @escaping UserResultResponse) {
+        let query = usersRef.whereField("email", isEqualTo: email)
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            if snapshot?.documents.count ?? 0 > 1 {
+                completion(.failure(FirestoreError.tooManyUsers(email)))
+            }
+            let document = snapshot?.documents.first
+            let userObj = try? UserObject(jsonDictionary: document?.data())
+            completion(.success(userObj))
+        }
+    }
+    
+    func isUserWithNicknameExist(_ nickname: String, completion: @escaping BoolResultResponse) {
+        let query = usersRef.whereField("nickname", isEqualTo: nickname)
+        query.getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            }
+            if snapshot?.documents.count ?? 0 > 1 {
+                completion(.failure(FirestoreError.tooManyUsers(nickname)))
+            }
+            
+            if let _ = snapshot?.documents.first {
+                completion(.success(true))
+                return
+            }
+            completion(.success(false))
+        }
     }
     
     func getUserFromDataBase(userId: String, completion: @escaping UserResultResponse) {
@@ -94,11 +138,45 @@ extension FirestoreService: FirestoreUserServiceable {
                 completion(.failure(FirestoreError.tooManyUsers(userId)))
                 return
             }
-            guard let userObject = UserObject(document: userDocument) else {
+            guard let userObject = try? UserObject(jsonDictionary: userDocument.data()) else {
                 completion(.failure(FirestoreError.badData))
                 return
             }
             completion(.success(userObject))
+        }
+    }
+    
+    func setUserProfileInfo(info: UserProfileModel, completion: @escaping SimpleErrorResponse) {
+        authenticationService.changeName(info.name) { [weak self] (error) in
+            if let error = error {
+                completion(error)
+                return
+            }
+            let id = self?.authenticationService.currentUser?.uid ?? ""
+            let query = self?.usersRef.whereField("id", isEqualTo: id)
+            query?.getDocuments { (snapshot, error) in
+                if let error = error {
+                    completion(error as NSError?)
+                    return
+                }
+                guard let snapshot = snapshot,
+                      !snapshot.documents.isEmpty else {
+                    completion(FirestoreError.userNotFound(id) as NSError)
+                    return
+                }
+                guard snapshot.documents.count == 1,
+                      let userDocument = snapshot.documents.first else {
+                    completion(FirestoreError.tooManyUsers(id) as NSError?)
+                    return
+                }
+                var userObject = try? UserObject(jsonDictionary: userDocument.data())
+                userObject?.setUserProfileInfo(info: info)
+                guard let json = (try? userObject?.asDictionary()) else {
+                    completion(FirestoreError.someMistake("Unable to parse user object"))
+                    return
+                }
+                userDocument.reference.setData(json, completion: completion)
+            }
         }
     }
 }

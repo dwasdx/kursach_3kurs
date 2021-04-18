@@ -18,10 +18,10 @@ extension PasswordRouter: PasswordRouting {
         viewController?.view.window?.rootViewController = vc
     }
     
-    func openCreateProfileScreen() {
+    func openCreateProfileScreen(userObject: UserObject?) {
         let router = CreateProfileRouter()
         let vc = CreateProfileViewController.initFromItsStoryboard()
-        let viewModel = CreateProfileViewModel()
+        let viewModel = CreateProfileViewModel(userObject: userObject)
         vc.router = router
         vc.viewModel = viewModel
         router.viewController = vc

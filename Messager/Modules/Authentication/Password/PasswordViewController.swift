@@ -9,13 +9,16 @@ import UIKit
 
 protocol PasswordRouting {
     func openTabBarScreen()
-    func openCreateProfileScreen()
+    func openCreateProfileScreen(userObject: UserObject?)
 }
 
 protocol PasswordViewModeling: BaseViewModeling {
     var password: String? { get set }
+    var greetingsText: String { get }
+    var buttonText: String { get }
+    var avatarData: Data? { get }
     
-    func login(_ completion: ((Bool, String?) -> Void)?)
+    func authenticate(_ completion: ((UserObject?, String?) -> Void)?)
 }
 
 class PasswordViewController: BaseViewController {
@@ -25,6 +28,7 @@ class PasswordViewController: BaseViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var distanceAnchor: NSLayoutConstraint!
     
     private let loginButtonDefaultOffset: CGFloat = -50
@@ -58,22 +62,45 @@ class PasswordViewController: BaseViewController {
     }
     
     private func configureUI() {
-        
+        nameLabel.text = viewModel.greetingsText
     }
     
     private func update() {
         guard isViewLoaded else {
             return
         }
+        updateLoginButton()
+        updateLoadingState()
+    }
+    
+    private func updateLoginButton() {
+        let isEmptyPassword = viewModel.password?.isEmpty ?? true
+        loginButton.isEnabled = !isEmptyPassword
+        let color: UIColor = isEmptyPassword ? .gray : .systemBlue
+        loginButton.backgroundColor = color
+    }
+    
+    private func updateLoadingState() {
+        let isLoading = viewModel.isLoading
+        loginButton.isHidden = isLoading
+        isLoading ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
+    }
+    
+    private func updateAvatarImage() {
+        if let data = viewModel.avatarData {
+            imageView.image = UIImage(data: data)
+        }
     }
     
     @IBAction func onContinue() {
-        viewModel.login { [weak self] (isProfileFilled, errorMessage) in
+        viewModel.authenticate { [weak self] (userObject, errorMessage) in
             if let error = errorMessage {
                 self?.showErrorAlert(message: error)
                 return
             }
-            isProfileFilled ? self?.router?.openTabBarScreen() : self?.router?.openCreateProfileScreen()
+            let isProfileFilled = userObject?.isFilled ?? false
+            isProfileFilled ? self?.router?.openTabBarScreen() :
+                self?.router?.openCreateProfileScreen(userObject: userObject)
         }
     }
     

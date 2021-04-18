@@ -15,6 +15,7 @@ protocol FirebaseAuthenticationServiceable {
     
     func register(withEmail email: String?, password: String?, name: String?, completion: @escaping (Result<User, Error>) -> ())
     func login(withEmail email: String?, password: String?, completion: @escaping (Result<User, Error>) -> ())
+    func changeName(_ name: String, completion: @escaping SimpleErrorResponse)
     func signOut() -> Error?
 }
 
@@ -64,15 +65,17 @@ extension FirebaseAuthenticationService: FirebaseAuthenticationServiceable {
                 completion(.failure(error!))
                 return
             }
-            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-            changeRequest?.displayName = name
-            changeRequest?.commitChanges(completion: { (error) in
-                if error != nil {
-                    completion(.success(result.user))
-                    return
+            if let name = name {
+                self.changeName(name) { (error) in
+                    if error != nil {
+                        completion(.success(result.user))
+                        return
+                    }
+                    completion(.success(self.currentUser ?? result.user))
                 }
-                completion(.success(self.currentUser ?? result.user))
-            })
+            } else {
+                completion(.success(result.user))
+            }
             
 //            completion(.success(result.user))
         }
@@ -91,6 +94,14 @@ extension FirebaseAuthenticationService: FirebaseAuthenticationServiceable {
             }
             completion(.success(result.user))
         }
+    }
+    
+    func changeName(_ name: String, completion: @escaping SimpleErrorResponse) {
+        guard let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() else {
+            return
+        }
+        changeRequest.displayName = name
+        changeRequest.commitChanges(completion: completion)
     }
     
     func signOut() -> Error? {

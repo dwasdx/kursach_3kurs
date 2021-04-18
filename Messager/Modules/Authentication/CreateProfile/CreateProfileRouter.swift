@@ -17,4 +17,16 @@ extension CreateProfileRouter: CreateProfileRouting {
         let vc = router.tabBar
         viewController?.view.window?.rootViewController = vc
     }
+    
+    func openWelcomeScreen(imageData: Data?) {
+        let router = WelcomeScreenRouter()
+        let vc = WelcomeScreenViewController.initFromItsStoryboard()
+        let viewModel = WelcomeScreenViewModel(imageData: imageData)
+        router.viewController = vc
+        vc.router = router
+        vc.viewModel = viewModel
+        vc.modalPresentationStyle = .overCurrentContext
+        vc.modalTransitionStyle = .crossDissolve
+        viewController?.present(vc, animated: true, completion: nil)
+    }
 }

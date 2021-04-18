@@ -33,47 +33,47 @@ extension UIView: NameDescribable {
 
 extension UIView {
     
-    @IBInspectable
-    var borderColor: UIColor {
-        get {
-            if let cgColor = layer.borderColor {
-                return UIColor(cgColor: cgColor)
-            } else {
-                return UIColor.clear
-            }
-        }
-        set {
-            layer.borderColor = newValue.cgColor
-        }
-    }
-    
-    @IBInspectable
-    var borderWidth: CGFloat {
-        get {
-            layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
-        }
-    }
+//    @IBInspectable
+//    var borderColor: UIColor {
+//        get {
+//            if let cgColor = layer.borderColor {
+//                return UIColor(cgColor: cgColor)
+//            } else {
+//                return UIColor.clear
+//            }
+//        }
+//        set {
+//            layer.borderColor = newValue.cgColor
+//        }
+//    }
+//
+//    @IBInspectable
+//    var borderWidth: CGFloat {
+//        get {
+//            layer.borderWidth
+//        }
+//        set {
+//            layer.borderWidth = newValue
+//        }
+//    }
     
 }
 
 // MARK: - Corners
 extension UIView {
     
-    @IBInspectable
-    var cornerRadius: CGFloat {
-        get {
-            layer.cornerRadius
-        }
-        set {
-            layer.cornerRadius = newValue
-            
-            //            let masksToBounds = newValue > 0 && shadowColor == nil
-            //            layer.masksToBounds = masksToBounds
-        }
-    }
+//    @IBInspectable
+//    var cornerRadius: CGFloat {
+//        get {
+//            layer.cornerRadius
+//        }
+//        set {
+//            layer.cornerRadius = newValue
+//
+//            //            let masksToBounds = newValue > 0 && shadowColor == nil
+//            //            layer.masksToBounds = masksToBounds
+//        }
+//    }
     
     // Not ready
     // TODO: https://vispud.blogspot.com/2019/04/how-to-set-cornerradius-for-only-bottom.html
@@ -155,49 +155,49 @@ extension UIView {
         }
     }
     
-    @IBInspectable
-    var shadowColor: UIColor? {
-        set {
-            layer.shadowColor = newValue!.cgColor
-        }
-        get {
-            if let color = layer.shadowColor {
-                return UIColor(cgColor: color)
-            }
-            else {
-                return nil
-            }
-        }
-    }
-    
-    @IBInspectable
-    var shadowOpacity: Float {
-        set {
-            layer.shadowOpacity = newValue
-        }
-        get {
-            layer.shadowOpacity
-        }
-    }
-    
-    @IBInspectable
-    var shadowOffset: CGPoint {
-        set {
-            layer.shadowOffset = CGSize(width: newValue.x, height: newValue.y)
-        }
-        get {
-            CGPoint(x: layer.shadowOffset.width, y:layer.shadowOffset.height)
-        }
-    }
-    
-    @IBInspectable
-    var shadowRadius: CGFloat {
-        set {
-            layer.shadowRadius = newValue
-        }
-        get {
-            return layer.shadowRadius
-        }
-    }
+//    @IBInspectable
+//    var shadowColor: UIColor? {
+//        set {
+//            layer.shadowColor = newValue!.cgColor
+//        }
+//        get {
+//            if let color = layer.shadowColor {
+//                return UIColor(cgColor: color)
+//            }
+//            else {
+//                return nil
+//            }
+//        }
+//    }
+//
+//    @IBInspectable
+//    var shadowOpacity: Float {
+//        set {
+//            layer.shadowOpacity = newValue
+//        }
+//        get {
+//            layer.shadowOpacity
+//        }
+//    }
+//
+//    @IBInspectable
+//    var shadowOffset: CGPoint {
+//        set {
+//            layer.shadowOffset = CGSize(width: newValue.x, height: newValue.y)
+//        }
+//        get {
+//            CGPoint(x: layer.shadowOffset.width, y:layer.shadowOffset.height)
+//        }
+//    }
+//
+//    @IBInspectable
+//    var shadowRadius: CGFloat {
+//        set {
+//            layer.shadowRadius = newValue
+//        }
+//        get {
+//            return layer.shadowRadius
+//        }
+//    }
     
 }

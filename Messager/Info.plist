@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access to Your camera to take a photos that you can send to your freinds</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need access to Your photos so that you could send images to your friends</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Allow access to Your contacts so that we could show You which of them are registred in Messager</string>
 	<key>CFBundleDevelopmentRegion</key>

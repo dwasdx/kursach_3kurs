@@ -12,18 +12,15 @@ class AuthenticationRouter {
 }
 
 extension AuthenticationRouter: AuthenticationRouting {
-    func openContinueAsScreen() {
+    func openContinueAsScreen(withObject: Any?) {
         let router = PasswordRouter()
-        let viewModel = PasswrodViewModel()
+        let viewModel = PasswrodViewModel(userObject: withObject as? UserObject,
+                                          email: withObject as? String)
         let vc = PasswordViewController.initFromItsStoryboard()
         vc.router = router
         router.viewController = vc
         vc.viewModel = viewModel
         
         viewController?.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func openCreateProfileScreen() {
-        
     }
 }

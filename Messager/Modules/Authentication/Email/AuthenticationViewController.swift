@@ -9,14 +9,13 @@ import UIKit
 import PhoneNumberKit
 
 protocol AuthenticationRouting {
-    func openContinueAsScreen()
-    func openCreateProfileScreen()
+    func openContinueAsScreen(withObject: Any?)
 }
 
 protocol AuthenticationViewModeling: BaseViewModeling {
     var email: String? { get set }
         
-    func login(_ completion: ((String?) -> Void)?)
+    func login(_ completion: ((Any?, String?) -> Void)?)
 }
 
 class AuthenticationViewController: BaseViewController {
@@ -66,6 +65,7 @@ class AuthenticationViewController: BaseViewController {
             return
         }
         updateLoginButton()
+        updateLoadingState()
     }
     
     private func updateLoginButton() {
@@ -75,18 +75,29 @@ class AuthenticationViewController: BaseViewController {
         loginButton.backgroundColor = color
     }
     
+    private func updateLoadingState() {
+        let isLoading = viewModel.isLoading
+        loginButton.isHidden = isLoading
+        isLoading ? loadingIndicator.startAnimating() : loadingIndicator.stopAnimating()
+    }
+    
     @IBAction func loginButtonTapped() {
-        viewModel.login { (errorMessage) in
+        viewModel.login { (object, errorMessage) in
             if let message = errorMessage {
                 self.showErrorAlert(message: message)
                 return
             }
-            self.router?.openContinueAsScreen()
+            self.router?.openContinueAsScreen(withObject: object)
+//            if let userObject = object as? UserObject {
+//                self.router?.openContinueAsScreen(withObject: userObject)
+//            } else if let email = object as? String {
+//
+//            }
         }
     }
     
     @IBAction func textFieldEditingChanged(_ textFIeld: UITextField) {
-        viewModel.email = textFIeld.text
+        viewModel.email = textFIeld.text?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 

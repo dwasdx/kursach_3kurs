@@ -16,6 +16,7 @@ protocol CurrentUserManaging {
     var isSignedIn: Bool { get }
     
     func createUser(name: String?, email: String?, password: String?, _ completion: @escaping (_ error: Error?) -> Void)
+    func authanticate(email: String, compleiton: @escaping UserResultResponse)
     func login(email: String?, password: String?, _ compleiton: @escaping (_ error: Error?) -> Void)
     func updateName(name: String, _ completion: @escaping (_ errorMessage: String?) -> Void)
     func logOut(_ completion: ((_ error: NSError?) -> Void)?)
@@ -55,8 +56,9 @@ class CurrentUserManager: NSObject {
 }
 
 extension CurrentUserManager: CurrentUserManaging {
-    func authenticate(_ phoneNumber: String, completion: @escaping ((UserObject) -> Void)) {
-        
+    
+    func authanticate(email: String, compleiton: @escaping UserResultResponse) {
+        firestoreService.isUserWithEmailExist(email, completion: compleiton)
     }
     
     func createUser(name: String?, email: String?, password: String?, _ completion: @escaping (Error?) -> Void) {
@@ -64,7 +66,6 @@ extension CurrentUserManager: CurrentUserManaging {
             switch result {
                 case .success(let user):
                     let currentUser = UserObject(firebaseUser: user)
-//                    currentUser.name = name ?? "NA"
                     self?.firestoreService.addUser(currentUser) { (error) in
                         if let error = error {
                             completion(error)
@@ -97,15 +98,22 @@ extension CurrentUserManager: CurrentUserManaging {
             completion("No current user")
             return
         }
-        firestoreService.updateUsername(userId: currentUserId, name) { [weak self] (result) in
-            switch result {
-                case .success(let user):
-                    self?.setCurrentUser(user)
-                    completion(nil)
-                case .failure(let error):
-                    completion(error.localizedDescription)
+        authenticationService.changeName(name) { [weak self] (error) in
+            if let error = error {
+                completion(error.localizedDescription)
+                return
+            }
+            self?.firestoreService.updateUsername(userId: currentUserId, name) { [weak self] (result) in
+                switch result {
+                    case .success(let user):
+                        self?.setCurrentUser(user)
+                        completion(nil)
+                    case .failure(let error):
+                        completion(error.localizedDescription)
+                }
             }
         }
+        
     }
     
     func logOut(_ completion: ((NSError?) -> Void)?) {
