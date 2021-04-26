@@ -17,16 +17,37 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-//        let router = TabBarRouter()
-//        let vc = router.tabBar
-        let vc = AuthenticationViewController.initFromItsStoryboard()
-        let router = AuthenticationRouter()
-        vc.router = router
-        router.viewController = vc
-        vc.viewModel = AuthenticationViewModel()
-        let navVc = UINavigationController(rootViewController: vc)
-        navVc.setNavigationBarHidden(true, animated: false)
-        window?.rootViewController = navVc
+        
+        let initialVC: UIViewController
+        if CurrentUserManager.shared.isSignedIn {
+            guard let user = CurrentUserManager.shared.currentUser.value else {
+                fatalError("No user object even though isSignedIn returns true")
+            }
+            if user.isFilled {
+                let router = TabBarRouter()
+                initialVC = router.tabBar
+            } else {
+                let vc = CreateProfileViewController.initFromItsStoryboard()
+                vc.viewModel = CreateProfileViewModel(userObject: user)
+                let router = CreateProfileRouter()
+                router.viewController = vc
+                vc.router = router
+                let navVC = UINavigationController(rootViewController: vc)
+                navVC.setNavigationBarHidden(true, animated: false)
+                initialVC = navVC
+            }
+        } else {
+            let vc = AuthenticationViewController.initFromItsStoryboard()
+            let router = AuthenticationRouter()
+            vc.router = router
+            router.viewController = vc
+            vc.viewModel = AuthenticationViewModel()
+            let navVc = UINavigationController(rootViewController: vc)
+            navVc.setNavigationBarHidden(true, animated: false)
+            initialVC = navVc
+        }
+        
+        window?.rootViewController = initialVC
         window?.makeKeyAndVisible()
     }
 

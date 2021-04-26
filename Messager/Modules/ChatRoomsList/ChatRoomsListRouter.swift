@@ -18,4 +18,9 @@ extension ChatRoomsListRouter: ChatRoomsListRouting {
         vc.viewModel = ChatRoomsListViewModel()
         navigationController.pushViewController(vc, animated: false)
     }
+    
+    func presentChatRoomScreen(model: ChatRoomModel) {
+        let vc = ChatRoomViewController.initFromItsStoryboard()
+        navigationController.pushViewController(vc, animated: false)
+    }
 }

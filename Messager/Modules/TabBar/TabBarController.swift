@@ -34,5 +34,6 @@ class TabBarController: UITabBarController {
             messages,
             profile,
         ]
+        selectedIndex = 1
     }
 }

@@ -47,6 +47,14 @@
 		756CEFB425EE96B800B5EA93 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CEFB325EE96B800B5EA93 /* ProfileRouter.swift */; };
 		756CEFB825EE972E00B5EA93 /* ContactsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CEFB725EE972E00B5EA93 /* ContactsRouter.swift */; };
 		756CEFBB25EE983100B5EA93 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756CEFBA25EE983100B5EA93 /* ProfileView.swift */; };
+		75803E8C26307D400022B1F2 /* ChatRoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803E8B26307D400022B1F2 /* ChatRoomModel.swift */; };
+		75803E9026307D870022B1F2 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803E8F26307D870022B1F2 /* MessageModel.swift */; };
+		75803E9426307EA30022B1F2 /* UserLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803E9326307EA30022B1F2 /* UserLocationService.swift */; };
+		75803E9826307EC80022B1F2 /* LocationCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803E9726307EC80022B1F2 /* LocationCoordinates.swift */; };
+		75803E9C263081120022B1F2 /* ChatRoomsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803E9B263081120022B1F2 /* ChatRoomsCell.swift */; };
+		75803EA226308A260022B1F2 /* ChatRoomRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803EA126308A260022B1F2 /* ChatRoomRouter.swift */; };
+		75803EA626308A440022B1F2 /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803EA526308A440022B1F2 /* ChatRoomViewModel.swift */; };
+		75803EA926308A740022B1F2 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75803EA826308A740022B1F2 /* ChatRoomViewController.swift */; };
 		759BF185262734CB003D8FAE /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF184262734CB003D8FAE /* CreateProfileViewController.swift */; };
 		759BF189262734E1003D8FAE /* CreateProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF188262734E1003D8FAE /* CreateProfileViewModel.swift */; };
 		759BF18C262734E6003D8FAE /* CreateProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF18B262734E6003D8FAE /* CreateProfileRouter.swift */; };
@@ -111,6 +119,7 @@
 		759BF245262C46A7003D8FAE /* AlertableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF210262C46A6003D8FAE /* AlertableTextField.swift */; };
 		759BF246262C46A7003D8FAE /* AlertableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF211262C46A6003D8FAE /* AlertableButton.swift */; };
 		759BF24B262C483C003D8FAE /* FirebaseStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 759BF24A262C483C003D8FAE /* FirebaseStorageService.swift */; };
+		759E10DB2637494E00188211 /* ChatRoomViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 759E10DA2637494E00188211 /* ChatRoomViewController.storyboard */; };
 		75A9F5F52624673600A9680F /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F5F42624673600A9680F /* PasswordViewController.swift */; };
 		75A9F5F82624678600A9680F /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A9F5F72624678600A9680F /* PasswordViewModel.swift */; };
 		75A9F5FB2624679600A9680F /* PasswordViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A9F5FA2624679600A9680F /* PasswordViewController.storyboard */; };
@@ -176,6 +185,14 @@
 		756CEFB325EE96B800B5EA93 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
 		756CEFB725EE972E00B5EA93 /* ContactsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsRouter.swift; sourceTree = "<group>"; };
 		756CEFBA25EE983100B5EA93 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		75803E8B26307D400022B1F2 /* ChatRoomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomModel.swift; sourceTree = "<group>"; };
+		75803E8F26307D870022B1F2 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		75803E9326307EA30022B1F2 /* UserLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationService.swift; sourceTree = "<group>"; };
+		75803E9726307EC80022B1F2 /* LocationCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCoordinates.swift; sourceTree = "<group>"; };
+		75803E9B263081120022B1F2 /* ChatRoomsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomsCell.swift; sourceTree = "<group>"; };
+		75803EA126308A260022B1F2 /* ChatRoomRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomRouter.swift; sourceTree = "<group>"; };
+		75803EA526308A440022B1F2 /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		75803EA826308A740022B1F2 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
 		759BF184262734CB003D8FAE /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		759BF188262734E1003D8FAE /* CreateProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewModel.swift; sourceTree = "<group>"; };
 		759BF18B262734E6003D8FAE /* CreateProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileRouter.swift; sourceTree = "<group>"; };
@@ -240,6 +257,7 @@
 		759BF210262C46A6003D8FAE /* AlertableTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertableTextField.swift; sourceTree = "<group>"; };
 		759BF211262C46A6003D8FAE /* AlertableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertableButton.swift; sourceTree = "<group>"; };
 		759BF24A262C483C003D8FAE /* FirebaseStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseStorageService.swift; sourceTree = "<group>"; };
+		759E10DA2637494E00188211 /* ChatRoomViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ChatRoomViewController.storyboard; sourceTree = "<group>"; };
 		75A9F5F42624673600A9680F /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		75A9F5F72624678600A9680F /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		75A9F5FA2624679600A9680F /* PasswordViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PasswordViewController.storyboard; sourceTree = "<group>"; };
@@ -423,6 +441,7 @@
 				756CEFB225EE966800B5EA93 /* Profile */,
 				756CEFB625EE972000B5EA93 /* Contacts */,
 				759BF191262834B6003D8FAE /* ChatRoomsList */,
+				75803EA026308A140022B1F2 /* ChatRoom */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -459,6 +478,43 @@
 			path = Contacts;
 			sourceTree = "<group>";
 		};
+		75803E8A26307D320022B1F2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				75803E8B26307D400022B1F2 /* ChatRoomModel.swift */,
+				75803E8F26307D870022B1F2 /* MessageModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		75803E9226307E9E0022B1F2 /* UserLocationService */ = {
+			isa = PBXGroup;
+			children = (
+				75803E9326307EA30022B1F2 /* UserLocationService.swift */,
+				75803E9726307EC80022B1F2 /* LocationCoordinates.swift */,
+			);
+			path = UserLocationService;
+			sourceTree = "<group>";
+		};
+		75803E9A263081050022B1F2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				75803E9B263081120022B1F2 /* ChatRoomsCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		75803EA026308A140022B1F2 /* ChatRoom */ = {
+			isa = PBXGroup;
+			children = (
+				75803EA126308A260022B1F2 /* ChatRoomRouter.swift */,
+				75803EA526308A440022B1F2 /* ChatRoomViewModel.swift */,
+				75803EA826308A740022B1F2 /* ChatRoomViewController.swift */,
+				759E10DA2637494E00188211 /* ChatRoomViewController.storyboard */,
+			);
+			path = ChatRoom;
+			sourceTree = "<group>";
+		};
 		759BF1832627349C003D8FAE /* CreateProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +530,8 @@
 		759BF191262834B6003D8FAE /* ChatRoomsList */ = {
 			isa = PBXGroup;
 			children = (
+				75803E8A26307D320022B1F2 /* Models */,
+				75803E9A263081050022B1F2 /* Cells */,
 				759BF19826283565003D8FAE /* ChatRoomsListRouter.swift */,
 				759BF1952628355F003D8FAE /* ChatRoomsListViewModel.swift */,
 				759BF192262834DB003D8FAE /* ChatRoomsListViewController.swift */,
@@ -831,6 +889,7 @@
 		75E82E5D25F67E090058293D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				75803E9226307E9E0022B1F2 /* UserLocationService */,
 				759BF249262C482C003D8FAE /* FirebaseStorageService */,
 				753122B525FFFA46004E59E5 /* FirebaseAuthenticationService */,
 				753122AF25FFFA45004E59E5 /* FirestoreService */,
@@ -924,6 +983,7 @@
 				7564E99F25E80BC0003F4933 /* GoogleService-Info.plist in Resources */,
 				75E82E4E25F67A1D0058293D /* TabBarController.storyboard in Resources */,
 				759BF225262C46A7003D8FAE /* Countries.bundle in Resources */,
+				759E10DB2637494E00188211 /* ChatRoomViewController.storyboard in Resources */,
 				75A9F5FB2624679600A9680F /* PasswordViewController.storyboard in Resources */,
 				7564E99325E8090F003F4933 /* Assets.xcassets in Resources */,
 				7564E99125E8090B003F4933 /* Main.storyboard in Resources */,
@@ -1012,6 +1072,7 @@
 				759BF236262C46A7003D8FAE /* ContactsPickerViewController.swift in Sources */,
 				759BF223262C46A7003D8FAE /* Locale+Extensions.swift in Sources */,
 				7564E98E25E8090B003F4933 /* ViewController.swift in Sources */,
+				75803EA226308A260022B1F2 /* ChatRoomRouter.swift in Sources */,
 				759BF229262C46A7003D8FAE /* PhoneCodeCell.swift in Sources */,
 				753122BF25FFFA49004E59E5 /* FirestoreError.swift in Sources */,
 				759BF1BA26286A58003D8FAE /* Codable+Extensions.swift in Sources */,
@@ -1022,6 +1083,7 @@
 				75E82E6325F684000058293D /* String+LocalExtensions.swift in Sources */,
 				759BF222262C46A7003D8FAE /* Common+Extensions.swift in Sources */,
 				759BF241262C46A7003D8FAE /* LikeButtonCell.swift in Sources */,
+				75803EA926308A740022B1F2 /* ChatRoomViewController.swift in Sources */,
 				753122C725FFFA49004E59E5 /* PersistantStoreService.swift in Sources */,
 				75A9F5F52624673600A9680F /* PasswordViewController.swift in Sources */,
 				759BF23B262C46A7003D8FAE /* DatePickerViewController.swift in Sources */,
@@ -1031,7 +1093,9 @@
 				759BF24B262C483C003D8FAE /* FirebaseStorageService.swift in Sources */,
 				759BF1BE2629DCA5003D8FAE /* UserProfileModel.swift in Sources */,
 				759BF217262C46A7003D8FAE /* UIViewController+Extensions.swift in Sources */,
+				75803E9C263081120022B1F2 /* ChatRoomsCell.swift in Sources */,
 				7531224F25FFF533004E59E5 /* AuthenticationViewController.swift in Sources */,
+				75803EA626308A440022B1F2 /* ChatRoomViewModel.swift in Sources */,
 				759BF189262734E1003D8FAE /* CreateProfileViewModel.swift in Sources */,
 				759BF22A262C46A7003D8FAE /* CurrencyCell.swift in Sources */,
 				759BF220262C46A7003D8FAE /* UIAlertController+Extensions.swift in Sources */,
@@ -1039,6 +1103,7 @@
 				753122C025FFFA49004E59E5 /* FirestoreService+User.swift in Sources */,
 				753122D425FFFAA9004E59E5 /* Signal.swift in Sources */,
 				759BF227262C46A7003D8FAE /* LocaleInfo.swift in Sources */,
+				75803E9826307EC80022B1F2 /* LocationCoordinates.swift in Sources */,
 				759BF1962628355F003D8FAE /* ChatRoomsListViewModel.swift in Sources */,
 				753122C425FFFA49004E59E5 /* AuthenticationError.swift in Sources */,
 				759BF21F262C46A7003D8FAE /* UIApplication+Extensions.swift in Sources */,
@@ -1067,6 +1132,7 @@
 				75A9F602262467AF00A9680F /* AuthenticationRouter.swift in Sources */,
 				75A9F5F82624678600A9680F /* PasswordViewModel.swift in Sources */,
 				759BF245262C46A7003D8FAE /* AlertableTextField.swift in Sources */,
+				75803E8C26307D400022B1F2 /* ChatRoomModel.swift in Sources */,
 				752252C7261B8CB7001DA6AF /* UIViewController+LocalExtensions.swift in Sources */,
 				75E82E6625F684700058293D /* ContactsViewModel.swift in Sources */,
 				759BF237262C46A7003D8FAE /* Contacts.swift in Sources */,
@@ -1084,8 +1150,10 @@
 				751EEB3825FA9A740077E8A5 /* SearchBar.swift in Sources */,
 				759BF240262C46A7003D8FAE /* ItemWithPhoto.swift in Sources */,
 				759BF21D262C46A7003D8FAE /* UIImage+Extensions.swift in Sources */,
+				75803E9026307D870022B1F2 /* MessageModel.swift in Sources */,
 				759BF23D262C46A7003D8FAE /* ItemWithImage.swift in Sources */,
 				7564E98C25E8090B003F4933 /* SceneDelegate.swift in Sources */,
+				75803E9426307EA30022B1F2 /* UserLocationService.swift in Sources */,
 				756CEFB025EE963E00B5EA93 /* TabBarRouter.swift in Sources */,
 				759BF22E262C46A7003D8FAE /* Assets.swift in Sources */,
 			);
