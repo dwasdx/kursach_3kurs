@@ -17,6 +17,7 @@ protocol CurrentUserManaging {
     
     func createUser(name: String?, email: String?, password: String?, _ completion: @escaping (_ error: Error?) -> Void)
     func authanticate(email: String, compleiton: @escaping UserResultResponse)
+    func updateCurrentUser(completion: @escaping UserResponse)
     func login(email: String?, password: String?, _ compleiton: @escaping (_ error: Error?) -> Void)
     func updateName(name: String, _ completion: @escaping (_ errorMessage: String?) -> Void)
     func logOut(_ completion: ((_ error: NSError?) -> Void)?)
@@ -33,6 +34,8 @@ class CurrentUserManager: NSObject {
     let currentUser = Emitter<UserObject?>(nil)
     let didAuthenticateSuccessfully = Emitter<Bool>(false)
     
+    private var timer: Timer?
+    
     static let shared = CurrentUserManager()
     private init(
         authenticationService: FirebaseAuthenticationServiceable = FirebaseAuthenticationService.shared,
@@ -43,6 +46,20 @@ class CurrentUserManager: NSObject {
         self.firestoreService = firestoreService
         self.userPersistantStoreService = persistantStoreService
         currentUser.value = userPersistantStoreService.userObject
+        super.init()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true, block: { [weak self] timer in
+            print("[\(Date().debugDescription)] UPDATING USER")
+            self?.updateCurrentUser(completion: { _, _ in
+                
+            })
+        })
+        timer?.fire()
+    }
+    
+    deinit {
+        timer?.invalidate()
+        timer = nil
     }
     
     private func setCurrentUser(_ user: UserObject?) {
@@ -76,6 +93,22 @@ extension CurrentUserManager: CurrentUserManaging {
                     }
                 case .failure(let error):
                     completion(error)
+            }
+        }
+    }
+    
+    func updateCurrentUser(completion: @escaping UserResponse) {
+        guard let user = currentUser.value else {
+            completion(nil, nil)
+            return
+        }
+        firestoreService.getUserFromDataBase(userId: user.id) { [weak self] result in
+            switch result {
+                case .success(let object):
+                    self?.setCurrentUser(object)
+                    completion(object, nil)
+                case .failure(let error):
+                    completion(nil, error)
             }
         }
     }

@@ -17,13 +17,14 @@ struct UserObject: Codable {
     var userInfo: String?
     var phoneNumber: String?
     var imageUrl: String?
+    var chats: [String]?
     
     var isFilled: Bool {
         name != nil && nickname != nil
     }
     
     enum CodingKeys: CodingKey {
-        case id, name, nickname, email, userInfo, phoneNumber, imageUrl
+        case id, name, nickname, email, userInfo, phoneNumber, imageUrl, chats
     }
     
     init(id: String,

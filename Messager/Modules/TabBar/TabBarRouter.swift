@@ -7,11 +7,13 @@
 
 import UIKit
 
-protocol TabBarRouting: class {
+protocol TabBarRouting: AnyObject {
     
     var profileRouter: ProfileRouting! { get }
     var chatRoomsRouter: ChatRoomsListRouting! { get }
     var contactsRouter: ContactRouting! { get }
+    
+    func setAuthenticationScreen()
 }
 
 class TabBarRouter {
@@ -23,6 +25,7 @@ class TabBarRouter {
     
     init() {
         tabBar = TabBarController.initFromItsStoryboard()
+        tabBar.viewModel = TabBarViewModel()
         profileRouter = ProfileRouter(tabBarRouter: self)
         contactsRouter = ContactRouter(tabBarRouter: self)
         chatRoomsRouter = ChatRoomsListRouter(tabBarRouter: self)
@@ -31,5 +34,12 @@ class TabBarRouter {
 }
 
 extension TabBarRouter: TabBarRouting {
-    
+    func setAuthenticationScreen() {
+        let vc = AuthenticationViewController.initFromItsStoryboard()
+        vc.viewModel = AuthenticationViewModel()
+        let router = AuthenticationRouter()
+        router.viewController = vc
+        vc.router = router
+        tabBar.view.window?.rootViewController = vc
+    }
 }

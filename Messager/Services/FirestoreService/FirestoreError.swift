@@ -14,7 +14,7 @@ enum FirestoreError: Error {
     case userNotFound(String)
     case tooManyUsers(String)
     case someMistake(String)
-    case benchNotFound(String)
+    case noChatSnapshot(String)
     case tooManyBenches(String)
 
     var localizedDescription: String {
@@ -29,8 +29,8 @@ enum FirestoreError: Error {
                 return "Too many users returned by an id-query with id \(id)"
             case .someMistake(let message):
                 return message
-            case .benchNotFound(let id):
-                return "Could not find bench with id \(id)"
+            case .noChatSnapshot(_):
+                return "No chat snapshot"
             case .tooManyBenches(let id):
                 return "Too many benches returned by an id-query with id \(id)"
         }

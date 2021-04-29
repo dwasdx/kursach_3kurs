@@ -7,9 +7,20 @@
 
 import UIKit
 
+protocol TabBarViewModeling {
+    var didSignOut: (() -> Void)? { get set }
+}
+
 class TabBarController: UITabBarController {
     
     weak var router: TabBarRouting!
+    var viewModel: TabBarViewModeling! {
+        didSet {
+            viewModel.didSignOut = { [weak self] in
+                self?.router.setAuthenticationScreen()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         

@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 typealias UserResultResponse = (Result<UserObject?, Error>) -> Void
+typealias UserResponse = (UserObject?, Error?) -> Void
 typealias SimpleErrorResponse = (_ errorMessage: Error?) -> Void
 typealias BoolResultResponse = (Result<Bool, Error>) -> Void
 

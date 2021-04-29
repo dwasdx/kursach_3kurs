@@ -59,6 +59,7 @@ class ChatRoomsListViewController: BaseViewController {
     }
     
     private func configureTableView() {
+        tableView.tableFooterView = UIView()
         tableView.delegate = self
         dataSource = ChatRoomsDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, model) -> UITableViewCell? in
             var cell = tableView.dequeueReusableCell(withIdentifier: ChatRoomsCell.typeName)

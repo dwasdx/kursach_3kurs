@@ -9,15 +9,17 @@
 import Foundation
 import Firebase
 
-struct FirestorePathKeys {
+enum FirestorePathKeys {
     static let users = "users"
-    static let benches = "benches"
+    static let chats = "chats"
+    static let message = "message"
 }
 
 final class FirestoreService {
     
     static let shared = FirestoreService()
-    
+    let firestore = Firestore.firestore()
+
     let authenticationService: FirebaseAuthenticationServiceable
     
     private init(
@@ -27,12 +29,13 @@ final class FirestoreService {
     }
     
     deinit {
-        benchesListener?.remove()
+        chatsListener?.remove()
+        messagesListener?.remove()
     }
     
-    var benchesListener: ListenerRegistration?
+    var chatsListener: ListenerRegistration?
+    var messagesListener: ListenerRegistration?
     
-    let firestore = Firestore.firestore()
     
 //    var benches: Emitter<[BenchObject]> = Emitter([])
     

@@ -21,7 +21,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let initialVC: UIViewController
         if CurrentUserManager.shared.isSignedIn {
             guard let user = CurrentUserManager.shared.currentUser.value else {
-                fatalError("No user object even though isSignedIn returns true")
+                //FIXME: firebase authentication state remains in keychain even after app is deleted from phone
+                CurrentUserManager.shared.logOut { _ in
+                    fatalError("No user object even though isSignedIn returns true")
+                }
+                return
             }
             if user.isFilled {
                 let router = TabBarRouter()

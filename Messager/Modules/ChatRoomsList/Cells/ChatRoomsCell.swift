@@ -26,9 +26,11 @@ class ChatRoomsCell: UITableViewCell {
                    firestoreService: FirestoreUserServiceable = FirestoreService.shared,
                    userManager: CurrentUserManaging = CurrentUserManager.shared) {
         self.model = model
-        
+        guard model.chatType == .personal else {
+            return
+        }
         let userId = userManager.currentUser.value?.id ?? ""
-        let interlocutorId = model.creatorId == userId ? model.recipientId : model.creatorId
+        let interlocutorId = model.members.first(where: { $0 != userId }) ?? ""
         interlocutorNameLabel.text = ""
         firestoreService.getUserFromDataBase(userId: interlocutorId) { [weak self] (result) in
             switch result {
@@ -39,26 +41,12 @@ class ChatRoomsCell: UITableViewCell {
             }
         }
         
-        if let lastMessage = model.messages.last {
-            var stringToShow = ""
-            if let _ = lastMessage.imageUrl {
-                stringToShow = "🖼"
-            }
-            if let text = lastMessage.text {
-                stringToShow += " " + text
-            } else if let _ = lastMessage.location {
-                stringToShow = "Location"
-            }
-            if lastMessage.senderId == userId {
-                stringToShow = "You: \(stringToShow)"
-            }
-            
-            let createdAt = lastMessage.createdAt
-            let date = Date(timeIntervalSince1970: Double(createdAt))
-            lastMessageTextLabel.isHidden = false
-            lastMessageTimeLabel.text = Self.timeFormatter.string(from: date)
-        } else {
-            lastMessageTextLabel.isHidden = true
-        }
+        lastMessageTextLabel.text = model.lastMessage.text
+        
+        let createdAt = model.lastMessage.sentAt
+        let date = Date(timeIntervalSince1970: Double(createdAt))
+        lastMessageTextLabel.isHidden = false
+        lastMessageTimeLabel.text = Self.timeFormatter.string(from: date)
+        
     }
 }
