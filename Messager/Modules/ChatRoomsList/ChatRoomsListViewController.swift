@@ -56,6 +56,10 @@ class ChatRoomsListViewController: BaseViewController {
     
     private func configureUI() {
         configureTableView()
+        
+        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        navigationItem.searchController?.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = true
     }
     
     private func configureTableView() {
@@ -97,5 +101,11 @@ extension ChatRoomsListViewController: UITableViewDelegate {
             return
         }
         router?.presentChatRoomScreen(model: model)
+    }
+}
+
+extension ChatRoomsListViewController: UISearchControllerDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        
     }
 }

@@ -12,4 +12,5 @@ struct ContactModel: Hashable, Identifiable {
     var name: String
     var phoneNumber: String
     var avatarUrl: String? = "person"
+    var isInApp: Bool = false
 }

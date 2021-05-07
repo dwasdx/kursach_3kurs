@@ -3,6 +3,10 @@ import UIKit
 
 extension UIColor {
     
+    static var chatOponentBgGray = UIColor(named: "chatOponentBgGray")!
+    static var chatOponentTextWhite = UIColor(named: "chatOponentTextWhite")!
+    static var chatTextViewBorderGray = UIColor(named: "chatTextViewBorderGray")!
+    
     /// SwifterSwift: https://github.com/SwifterSwift/SwifterSwift
     /// Hexadecimal value string (read-only).
     public var hexString: String {

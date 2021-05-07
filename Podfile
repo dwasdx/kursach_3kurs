@@ -10,6 +10,7 @@ target 'Messager' do
   pod 'Firebase/Storage'
   pod 'PhoneNumberKit'
   pod 'MessageKit'
+  pod 'Lightbox'
   # Pods for Messager
 
 end

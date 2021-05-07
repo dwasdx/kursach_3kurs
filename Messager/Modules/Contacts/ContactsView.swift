@@ -25,6 +25,7 @@ final class ContactsViewController: UIViewController, UIViewControllerRepresenta
 struct ContactsView: View {
     
     @ObservedObject var viewModel: ContactsViewModel
+    
     init(router: ContactRouting?) {
         viewModel = ContactsViewModel(router: router)
     }
@@ -42,6 +43,9 @@ struct ContactsView: View {
             .navigationBarTitle("Contacts", displayMode: .inline)
             .edgesIgnoringSafeArea(.all)
         }
+        .onAppear(perform: {
+            viewModel.fetchContacts()
+        })
         .alert(isPresented: $viewModel.isAllowedContactsAccess, content: {
             Alert(title: Text("Access denied"), message: Text("Access to contacts is denied. Please, go to Settings -> Messager and allow access to contacts so that you could see, which of your contacts are registred in Messager"), dismissButton: .default(Text("Ok")))
         })
@@ -56,7 +60,8 @@ fileprivate struct SingleContactView: View {
     init() {
         self._contact = .constant(ContactModel(id: UUID().uuidString,
                                                name: "Name123",
-                                               phoneNumber: "+78005553535"))
+                                               phoneNumber: "+78005553535",
+                                               isInApp: true))
     }
     
     init(contact: ContactModel) {
@@ -69,6 +74,7 @@ fileprivate struct SingleContactView: View {
                 Image(systemName: contact.avatarUrl!)
                     .frame(width: 40, height: 40, alignment: .center)
                     .background(Color.blue)
+                    .foregroundColor(.white)
                     .clipShape(Circle())
                 //                .background(contact.avatarUrl == nil ? Color.blue : Color.clear)
                 VStack(alignment: .leading, spacing: 4) {
@@ -78,7 +84,12 @@ fileprivate struct SingleContactView: View {
                         .foregroundColor(.gray)
                 }
                 Spacer()
-                // something indicating about whether user is in app or not
+                if contact.isInApp {
+                    Image("appIcon")
+                        .resizable()
+                        .frame(width: 15, height: 15, alignment: .center)
+                        .offset(x: -16, y: -10)
+                }
             }
             Divider()
                 .foregroundColor(.black)

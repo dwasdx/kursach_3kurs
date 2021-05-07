@@ -138,6 +138,7 @@
 		75E82E6325F684000058293D /* String+LocalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E82E6225F684000058293D /* String+LocalExtensions.swift */; };
 		75E82E6625F684700058293D /* ContactsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E82E6525F684700058293D /* ContactsViewModel.swift */; };
 		75E82E6925F6875A0058293D /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E82E6825F6875A0058293D /* ContactsView.swift */; };
+		75FC9613264468F0009547BA /* DateFormattingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FC9612264468F0009547BA /* DateFormattingManager.swift */; };
 		DA2B59C9D2308CAA47C5B07B /* Pods_Messager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6808EA7362D5992EBE982C06 /* Pods_Messager.framework */; };
 /* End PBXBuildFile section */
 
@@ -278,6 +279,7 @@
 		75E82E6225F684000058293D /* String+LocalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+LocalExtensions.swift"; sourceTree = "<group>"; };
 		75E82E6525F684700058293D /* ContactsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewModel.swift; sourceTree = "<group>"; };
 		75E82E6825F6875A0058293D /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		75FC9612264468F0009547BA /* DateFormattingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormattingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +318,7 @@
 		753122A625FFF965004E59E5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				75FC9611264468E2009547BA /* DateFormattingManager */,
 				753122A725FFF965004E59E5 /* CurrentUserManager */,
 			);
 			path = Managers;
@@ -479,8 +482,8 @@
 			children = (
 				75E82E5925F67DD10058293D /* Models */,
 				756CEFB725EE972E00B5EA93 /* ContactsRouter.swift */,
-				75E82E6825F6875A0058293D /* ContactsView.swift */,
 				75E82E6525F684700058293D /* ContactsViewModel.swift */,
+				75E82E6825F6875A0058293D /* ContactsView.swift */,
 			);
 			path = Contacts;
 			sourceTree = "<group>";
@@ -876,9 +879,9 @@
 		75E82E5325F67A990058293D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				753122CF25FFFAA9004E59E5 /* Bindings */,
 				75E82E5425F67AA50058293D /* NameDescribable.swift */,
 				75E82E6225F684000058293D /* String+LocalExtensions.swift */,
-				753122CF25FFFAA9004E59E5 /* Bindings */,
 				759BF1B926286A58003D8FAE /* Codable+Extensions.swift */,
 			);
 			path = Utilities;
@@ -903,6 +906,14 @@
 				75E82E5E25F67E160058293D /* ContactsService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		75FC9611264468E2009547BA /* DateFormattingManager */ = {
+			isa = PBXGroup;
+			children = (
+				75FC9612264468F0009547BA /* DateFormattingManager.swift */,
+			);
+			path = DateFormattingManager;
 			sourceTree = "<group>";
 		};
 		B0A51E3C6053894A6C7BFC19 /* Pods */ = {
@@ -1111,6 +1122,7 @@
 				753122C025FFFA49004E59E5 /* FirestoreService+User.swift in Sources */,
 				753122D425FFFAA9004E59E5 /* Signal.swift in Sources */,
 				759BF227262C46A7003D8FAE /* LocaleInfo.swift in Sources */,
+				75FC9613264468F0009547BA /* DateFormattingManager.swift in Sources */,
 				75803E9826307EC80022B1F2 /* LocationCoordinates.swift in Sources */,
 				759BF1962628355F003D8FAE /* ChatRoomsListViewModel.swift in Sources */,
 				753122C425FFFA49004E59E5 /* AuthenticationError.swift in Sources */,

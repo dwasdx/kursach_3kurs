@@ -12,6 +12,8 @@ final class ContactsViewModel: ObservableObject {
     
     private weak var router: ContactRouting?
     
+    private let contactsLock = NSLock()
+    
     private var contacts = [
         ContactModel(id: UUID().uuidString,
                      name: "Ivan",
@@ -49,15 +51,18 @@ final class ContactsViewModel: ObservableObject {
     }
     
     private let contactsService: ContactsServiceable
+    private let firestoreService: FirestoreUserServiceable
     
     init(
         router: ContactRouting?,
-        contactsService: ContactsServiceable = ContactsService.shared
+        contactsService: ContactsServiceable = ContactsService.shared,
+        firestoreService: FirestoreUserServiceable = FirestoreService.shared
     ) {
         self.contactsService = contactsService
+        self.firestoreService = firestoreService
         filteredContacts = []
         filteredContacts = contactsSorted
-        fetchContacts()
+//        fetchContacts()
     }
     
     private func setFilteredContacts(_ contacts: [ContactModel]) {
@@ -78,7 +83,7 @@ final class ContactsViewModel: ObservableObject {
         setFilteredContacts(sorted)
     }
     
-    private func fetchContacts() {
+    func fetchContacts() {
         DispatchQueue(label: "com.Messager.fetchContacts",
                       qos: .utility,
                       attributes: [],
@@ -98,10 +103,52 @@ final class ContactsViewModel: ObservableObject {
                                                    phoneNumber: phoneNumber)
                         self.contacts.append(contact)
                     }
-                    
+                    self.checkContacts()
                 } catch {
                     self.isAllowedContactsAccess = true
                 }
             }
+    }
+    
+    private func checkContacts() {
+        #warning("Needed fix for Invalid Query. 'in' filters support a maximum of 10 elements in the value array")
+        let phoneNumbers = contacts.map { $0.phoneNumber.decimalString }
+//        let phoneNumbers = [String](repeating: "fdsfas", count: 15)
+        dump(phoneNumbers, name: "Phone numbers")
+        phoneNumbers.chunk(size: 10).forEach { numbers in
+            self.contactsLock.lock()
+            firestoreService.getUsersByPhoneNumbers(numbers) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+                defer {
+                    self.contactsLock.unlock()
+                }
+                switch result {
+                    case .success(let users):
+                        dump(users, name: "Found users", maxDepth: 2)
+                        users.forEach { user in
+                            if let index = self.contacts.firstIndex(where: { $0.phoneNumber.decimalString == user.phoneNumber?.decimalString }) {
+                                self.contacts[index].isInApp = true
+                            }
+                        }
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+        firestoreService.getUsersByPhoneNumbers(phoneNumbers) { result in
+            switch result {
+                case .success(let users):
+                    dump(users, name: "Found users", maxDepth: 2)
+                    users.forEach { user in
+                        if let index = self.contacts.firstIndex(where: { $0.phoneNumber.decimalString == user.phoneNumber?.decimalString }) {
+                            self.contacts[index].isInApp = true
+                        }
+                    }
+                case .failure(let error):
+                    print(error)
+            }
+        }
     }
 }

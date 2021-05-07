@@ -28,6 +28,8 @@ protocol FirestoreChatServiceable {
     func setupChatsListener(chats: [String], completion: @escaping ChatChangeResultCompletion)
     func setupChatMessagesListener(chatId: String, completion: @escaping MessageChangeResultCompletion)
     func removeMessagesListener()
+    
+    func sendMessage(_ message: MessageModel, toChat: ChatRoomModel, completion: @escaping SimpleErrorResponse)
 }
 
 extension FirestoreService: FirestoreChatServiceable {
@@ -114,5 +116,35 @@ extension FirestoreService: FirestoreChatServiceable {
     func removeMessagesListener() {
         messagesListener?.remove()
         messagesListener = nil
+    }
+    
+    func sendMessage(_ message: MessageModel, toChat: ChatRoomModel, completion: @escaping SimpleErrorResponse) {
+        var chat = toChat
+        let ref = messageRef.document(chat.chatId).collection("messages")
+        do {
+            let data = try message.asDictionary()
+            ref.addDocument(data: data) { [weak self] error in
+                if let error = error {
+                    completion(error)
+                    return
+                }
+                chat.lastMessage = message.asShortMessage()
+                guard let data = try? chat.asDictionary() else {
+                    completion(FirestoreError.wrongObjectFormat)
+                    return
+                }
+                self?.chatsRef.document(chat.chatId).setData(data) { error in
+                    if let error = error {
+                        completion(error)
+                        return
+                    }
+                    completion(nil)
+                }
+                
+            }
+        } catch let error {
+            completion(error)
+        }
+        
     }
 }

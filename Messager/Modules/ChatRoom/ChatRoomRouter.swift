@@ -10,3 +10,7 @@ import UIKit
 class ChatRoomRouter {
     weak var viewController: UIViewController?
 }
+
+extension ChatRoomRouter: ChatRoomRouting {
+    
+}

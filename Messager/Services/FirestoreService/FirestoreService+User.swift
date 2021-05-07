@@ -11,14 +11,18 @@ import Firebase
 
 typealias UserResultResponse = (Result<UserObject?, Error>) -> Void
 typealias UserResponse = (UserObject?, Error?) -> Void
+typealias UsersResultResponse = (Result<[UserObject], Error>) -> Void
 typealias SimpleErrorResponse = (_ errorMessage: Error?) -> Void
 typealias BoolResultResponse = (Result<Bool, Error>) -> Void
 
 protocol FirestoreUserServiceable {
     func isUserWithEmailExist(_ email: String, completion: @escaping UserResultResponse)
     func isUserWithNicknameExist(_ nickname: String, completion: @escaping BoolResultResponse)
+    func getUsersByPhoneNumbers(_ phoneNumbers: [String], completion: @escaping UsersResultResponse)
+    
     func addUser(_ user: UserObject, completion: @escaping SimpleErrorResponse)
     func updateUsername(userId: String, _ userName: String, completion: @escaping UserResultResponse)
+    
     func getUserFromDataBase(userId: String, completion: @escaping UserResultResponse)
     func setUserProfileInfo(info: UserProfileModel, completion: @escaping SimpleErrorResponse)
 }
@@ -98,9 +102,11 @@ extension FirestoreService: FirestoreUserServiceable {
         query.getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
+                return
             }
             if snapshot?.documents.count ?? 0 > 1 {
                 completion(.failure(FirestoreError.tooManyUsers(nickname)))
+                return
             }
             
             if let _ = snapshot?.documents.first {
@@ -111,19 +117,25 @@ extension FirestoreService: FirestoreUserServiceable {
         }
     }
     
+    func getUsersByPhoneNumbers(_ phoneNumbers: [String], completion: @escaping UsersResultResponse) {
+        let query = usersRef.whereField("phoneNumber", in: phoneNumbers)
+        
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let snapshot = snapshot else {
+                return
+            }
+            let users = snapshot.documents.compactMap {
+                try? UserObject(jsonDictionary: $0.data())
+            }
+            completion(.success(users))
+        }
+    }
+    
     func getUserFromDataBase(userId: String, completion: @escaping UserResultResponse) {
-//        let usersRef = self.usersRef
-//        usersRef.document(userId).getDocument { (snapshot, error) in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//            if snapshot == nil {
-//                completion(.success(nil))
-//            }
-//            let currentData = CurrentUser(document: snapshot!)
-//            completion(.success(currentData))
-//        }
         let query = usersRef.whereField("id", isEqualTo: userId)
         query.getDocuments { (snapshot, error) in
             if let error = error {

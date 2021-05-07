@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import MessageKit
 
 struct MessageModel: Hashable, Codable {
+    
     let messageId: String
     let sentBy: String
     let sentAt: TimeInterval
@@ -34,10 +36,37 @@ struct MessageModel: Hashable, Codable {
     func asShortMessage() -> ShortMessageModel {
         ShortMessageModel(sentAt: sentAt, sentBy: sentBy, text: shortText)
     }
+    
+    func asMessageType() -> MessageType {
+        MessageDisplayModel(sender: SenderUser(senderId: sentBy, displayName: ""),
+                messageId: messageId,
+                sentDate: Date(timeIntervalSince1970: sentAt),
+                kind: .text("Warning - hardcoded in \(#function)"))
+    }
 }
+
+//extension MessageModel: MessageType {
+//    var sender: SenderType {
+//        SenderUser(senderId: sentBy, displayName: "")
+//    }
+//    var sentDate: Date {
+//        Date(timeIntervalSince1970: sentAt)
+//    }
+//
+//    var kind: MessageKind {
+//
+//    }
+//}
 
 struct ShortMessageModel: Codable, Hashable {
     let sentAt: TimeInterval
     let sentBy: String
     let text: String
+}
+
+struct MessageDisplayModel: MessageType {
+    var sender: SenderType
+    var messageId: String
+    var sentDate: Date
+    var kind: MessageKind
 }
