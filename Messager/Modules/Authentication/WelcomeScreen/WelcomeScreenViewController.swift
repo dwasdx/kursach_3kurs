@@ -38,5 +38,6 @@ class WelcomeScreenViewController: BaseViewController {
     }
     
     @IBAction func onContinue() {
+        router?.openTabBarScreen()
     }
 }

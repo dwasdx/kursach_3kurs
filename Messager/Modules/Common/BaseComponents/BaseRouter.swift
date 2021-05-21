@@ -7,7 +7,7 @@
 
 import UIKit
 
-public protocol BaseRouting: class {
+public protocol BaseRouting: AnyObject {
     var navigationController: UINavigationController { get set }
 }
 

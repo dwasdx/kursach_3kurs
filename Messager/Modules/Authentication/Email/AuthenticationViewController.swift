@@ -10,11 +10,12 @@ import PhoneNumberKit
 
 protocol AuthenticationRouting {
     func openContinueAsScreen(withObject: Any?)
+    func openLoginScreen()
+    func openSignUpScreen()
 }
 
 protocol AuthenticationViewModeling: BaseViewModeling {
     var email: String? { get set }
-        
     func login(_ completion: ((Any?, String?) -> Void)?)
 }
 
@@ -25,9 +26,9 @@ class AuthenticationViewController: BaseViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var distanceAnchor: NSLayoutConstraint!
-    
+
     private let loginButtonDefaultOffset: CGFloat = -30
-    
+
     var router: AuthenticationRouting?
     var viewModel: AuthenticationViewModeling! {
         didSet {
@@ -88,11 +89,6 @@ class AuthenticationViewController: BaseViewController {
                 return
             }
             self.router?.openContinueAsScreen(withObject: object)
-//            if let userObject = object as? UserObject {
-//                self.router?.openContinueAsScreen(withObject: userObject)
-//            } else if let email = object as? String {
-//
-//            }
         }
     }
     
@@ -105,8 +101,6 @@ extension AuthenticationViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         !(textField.text ?? "").isEmpty
     }
-    
-    
 }
 
 extension AuthenticationViewController {

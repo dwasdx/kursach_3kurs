@@ -12,6 +12,7 @@ import Firebase
 protocol FirebaseAuthenticationServiceable {
     var currentUser: User? { get }
     var userRegistared: Bool { get }
+    var authenticationChanged: Emitter<Bool> { get }
     
     func register(withEmail email: String?, password: String?, name: String?, completion: @escaping (Result<User, Error>) -> ())
     func login(withEmail email: String?, password: String?, completion: @escaping (Result<User, Error>) -> ())

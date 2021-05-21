@@ -23,4 +23,17 @@ extension AuthenticationRouter: AuthenticationRouting {
         
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func openSignUpScreen() {
+        let vc = SignUpViewController()
+        vc.viewModel = SignUpViewModel()
+        let router = SignUpRouter()
+        router.viewController = vc
+        vc.router = router
+        viewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func openLoginScreen() {
+        
+    }
 }

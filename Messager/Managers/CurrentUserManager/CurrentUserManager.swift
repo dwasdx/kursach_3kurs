@@ -18,6 +18,7 @@ protocol CurrentUserManaging {
     func createUser(name: String?, email: String?, password: String?, _ completion: @escaping (_ error: Error?) -> Void)
     func authanticate(email: String, compleiton: @escaping UserResultResponse)
     func updateCurrentUser(completion: @escaping UserResponse)
+    func updateDisplayName(name: String, _ completion: @escaping (String?) -> Void)
     func login(email: String?, password: String?, _ compleiton: @escaping (_ error: Error?) -> Void)
     func updateName(name: String, _ completion: @escaping (_ errorMessage: String?) -> Void)
     func logOut(_ completion: ((_ error: NSError?) -> Void)?)
@@ -127,26 +128,28 @@ extension CurrentUserManager: CurrentUserManaging {
     }
     
     func updateName(name: String, _ completion: @escaping (String?) -> Void) {
-        guard let currentUserId = currentUser.value?.id else {
-            completion("No current user")
-            return
-        }
-        authenticationService.changeName(name) { [weak self] (error) in
-            if let error = error {
-                completion(error.localizedDescription)
+        updateDisplayName(name: name) { [weak self] errorMessage in
+            guard let id = self?.currentUser.value?.id else {
+                completion("No current user")
                 return
             }
-            self?.firestoreService.updateUsername(userId: currentUserId, name) { [weak self] (result) in
+            self?.firestoreService.updateUsername(userId: id, name, completion: { result in
                 switch result {
-                    case .success(let user):
-                        self?.setCurrentUser(user)
-                        completion(nil)
-                    case .failure(let error):
-                        completion(error.localizedDescription)
+                case .success(let user):
+                    self?.setCurrentUser(user)
+                    completion(nil)
+                case .failure(let error):
+                    completion(error.localizedDescription)
                 }
-            }
+            })
         }
         
+    }
+    
+    func updateDisplayName(name: String, _ completion: @escaping (String?) -> Void) {
+        authenticationService.changeName(name) { error in
+            completion(error?.localizedDescription)
+        }
     }
     
     func logOut(_ completion: ((NSError?) -> Void)?) {
@@ -154,6 +157,7 @@ extension CurrentUserManager: CurrentUserManaging {
             completion?(error as NSError?)
             return
         }
+        currentUser.value = nil
         userPersistantStoreService.userObject = nil
         completion?(nil)
     }

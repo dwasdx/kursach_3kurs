@@ -22,6 +22,8 @@ protocol FirebaseStorageServiceable {
                               completion: @escaping StringErrorResponse)
     func downloadMessagePicture(chatId: String, messageId: String, completion: @escaping DataResultResposne)
     func downloadMessagePicture(path: String, completion: @escaping DataResultResposne)
+    
+    func getDownloadUrl(forAvatarImageUrl urlString: String, completion: @escaping ((URL?, Error?) -> Void))
 }
 
 fileprivate struct FirebaseStoragePathKeys {
@@ -161,5 +163,9 @@ extension FirebaseStorageService: FirebaseStorageServiceable {
                 completion(.success(data))
             }
         }
+    }
+    
+    func getDownloadUrl(forAvatarImageUrl urlString: String, completion: @escaping ((URL?, Error?) -> Void)) {
+        reference.child(urlString).downloadURL(completion: completion)
     }
 }

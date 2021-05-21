@@ -6,6 +6,10 @@ extension UIColor {
     static var chatOponentBgGray = UIColor(named: "chatOponentBgGray")!
     static var chatOponentTextWhite = UIColor(named: "chatOponentTextWhite")!
     static var chatTextViewBorderGray = UIColor(named: "chatTextViewBorderGray")!
+    static var bgWhite = UIColor(named: "bgWhite")!
+    static var buttonDark = UIColor(named: "buttonDark")!
+    static var buttonRed = UIColor(named: "buttonRed")!
+    static var textFieldWhite = UIColor(named: "textFieldWhite")!
     
     /// SwifterSwift: https://github.com/SwifterSwift/SwifterSwift
     /// Hexadecimal value string (read-only).

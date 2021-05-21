@@ -37,10 +37,14 @@ class PasswordViewController: BaseViewController {
     var viewModel: PasswordViewModeling! {
         didSet {
             viewModel.didChange = { [weak self] in
-                self?.update()
+                DispatchQueue.main.async { [weak self] in
+                    self?.update()
+                }
             }
             viewModel.didGetError = { [weak self] (message) in
-                self?.showErrorAlert(message: message)
+                DispatchQueue.main.async { [weak self] in
+                    self?.showErrorAlert(message: message)
+                }
             }
         }
     }
@@ -71,6 +75,7 @@ class PasswordViewController: BaseViewController {
         }
         updateLoginButton()
         updateLoadingState()
+        updateAvatarImage()
     }
     
     private func updateLoginButton() {
