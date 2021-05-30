@@ -58,6 +58,7 @@ final class ContactsViewModel: ObservableObject {
         contactsService: ContactsServiceable = ContactsService.shared,
         firestoreService: FirestoreUserServiceable = FirestoreService.shared
     ) {
+        self.router = router
         self.contactsService = contactsService
         self.firestoreService = firestoreService
         filteredContacts = []
@@ -113,16 +114,20 @@ final class ContactsViewModel: ObservableObject {
     private func checkContacts() {
         #warning("Needed fix for Invalid Query. 'in' filters support a maximum of 10 elements in the value array")
         let phoneNumbers = contacts.map { $0.phoneNumber.decimalString }
-//        let phoneNumbers = [String](repeating: "fdsfas", count: 15)
+//        let phoneNumbers = [String](repeating: "fdsfas", count: 11)
         dump(phoneNumbers, name: "Phone numbers")
+//        var iter = 0
         phoneNumbers.chunk(size: 10).forEach { numbers in
             self.contactsLock.lock()
+//            print("iter \(iter)")
+//            iter += 1
             firestoreService.getUsersByPhoneNumbers(numbers) { [weak self] result in
+                defer {
+//                    print("result \(result)")
+                    self?.contactsLock.unlock()
+                }
                 guard let self = self else {
                     return
-                }
-                defer {
-                    self.contactsLock.unlock()
                 }
                 switch result {
                     case .success(let users):
@@ -150,5 +155,9 @@ final class ContactsViewModel: ObservableObject {
                     print(error)
             }
         }
+    }
+    
+    func didTapContact(_ contact: ContactModel) {
+        router?.presentContactProfileViewController(contact: contact, completion: nil)
     }
 }

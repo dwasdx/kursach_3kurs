@@ -18,6 +18,9 @@ protocol KeyValuePersistentStorage {
     func set(key: String, value: Date?)
     func get(key: String) -> Date?
     
+    func set(key: String, value: Bool)
+    func get(key: String) -> Bool
+    
     func set(key: String, value: Any?)
     func object(forKey key: String) -> Any?
 }
@@ -62,6 +65,14 @@ extension UserDefaultsStorage: KeyValuePersistentStorage {
         }
         
         return date
+    }
+    
+    func set(key: String, value: Bool) {
+        UserDefaults.standard.set(value, forKey: key)
+    }
+    
+    func get(key: String) -> Bool {
+        UserDefaults.standard.bool(forKey: key)
     }
     
     //Any

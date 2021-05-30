@@ -31,24 +31,26 @@ struct ContactsView: View {
     }
     
     var body: some View {
-        NavigationView {
-            List {
-                SearchBar(text: $viewModel.searchString)
-                    .padding(.horizontal, -16)
-                ForEach(viewModel.filteredContacts) { (contact: ContactModel) -> SingleContactView in
-                    SingleContactView(contact: contact)
+//        NavigationView {
+        List {
+            SearchBar(text: $viewModel.searchString)
+                .padding(.horizontal, -16)
+            ForEach(viewModel.filteredContacts) { (contact: ContactModel) -> SingleContactView in
+                SingleContactView(contact: contact) { contact in
+                    viewModel.didTapContact(contact)
                 }
             }
-            .listSeparatorStyle(.none)
-            .navigationBarTitle("Contacts", displayMode: .inline)
-            .edgesIgnoringSafeArea(.all)
         }
+        .listSeparatorStyle(.none)
+        .navigationBarTitle("Contacts", displayMode: .inline)
+        .edgesIgnoringSafeArea(.all)
         .onAppear(perform: {
             viewModel.fetchContacts()
         })
         .alert(isPresented: $viewModel.isAllowedContactsAccess, content: {
             Alert(title: Text("Access denied"), message: Text("Access to contacts is denied. Please, go to Settings -> Messager and allow access to contacts so that you could see, which of your contacts are registred in Messager"), dismissButton: .default(Text("Ok")))
         })
+//        }
         
         
     }
@@ -57,15 +59,18 @@ struct ContactsView: View {
 fileprivate struct SingleContactView: View {
     
     @Binding var contact: ContactModel
+    var tapHandler: ((ContactModel) -> Void)
     init() {
         self._contact = .constant(ContactModel(id: UUID().uuidString,
                                                name: "Name123",
                                                phoneNumber: "+78005553535",
                                                isInApp: true))
+        self.tapHandler = { _ in }
     }
     
-    init(contact: ContactModel) {
+    init(contact: ContactModel, tapHandler: @escaping ((ContactModel) -> Void)) {
         self._contact = .constant(contact)
+        self.tapHandler = tapHandler
     }
     
     var body: some View {
@@ -95,6 +100,9 @@ fileprivate struct SingleContactView: View {
                 .foregroundColor(.black)
                 .frame(width: nil, height: 3, alignment: .center)
                 .padding(.leading, 40)
+        }
+        .onTapGesture {
+            tapHandler(contact)
         }
 //        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
     }

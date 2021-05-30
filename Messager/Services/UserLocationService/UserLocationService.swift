@@ -7,7 +7,7 @@
 
 import CoreLocation
 
-protocol UserLocationServiceable: class {
+protocol UserLocationServiceable: AnyObject {
     
     var isEnabled: Bool { get }
     

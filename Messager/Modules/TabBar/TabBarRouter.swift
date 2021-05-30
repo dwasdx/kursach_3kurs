@@ -40,6 +40,8 @@ extension TabBarRouter: TabBarRouting {
         let router = AuthenticationRouter()
         router.viewController = vc
         vc.router = router
-        tabBar.view.window?.rootViewController = vc
+        let nvc = UINavigationController(rootViewController: vc)
+        nvc.setNavigationBarHidden(true, animated: false)
+        tabBar.view.window?.rootViewController = nvc
     }
 }

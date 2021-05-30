@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
+        window?.overrideUserInterfaceStyle = SettingsManager.shared.theme.userInterfaceStyle
         
         let initialVC: UIViewController
         if CurrentUserManager.shared.isSignedIn {
@@ -42,6 +43,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
         } else {
             let vc = AuthenticationViewController.initFromItsStoryboard()
+//            let vc = AuthenticationViewController()
             let router = AuthenticationRouter()
             vc.router = router
             router.viewController = vc
