@@ -12,7 +12,7 @@ import Lightbox
 import InputBarAccessoryView
 
 protocol ChatRoomRouting {
-    
+    func presentContactProfileViewController(contact: ContactModel, completion: (() -> Void)?)
 }
 
 protocol ChatRoomViewModeling: BaseViewModeling {
@@ -21,7 +21,7 @@ protocol ChatRoomViewModeling: BaseViewModeling {
     var otherUser: UserObject? { get }
     var otherUserAvatarData: Data? { get }
     
-    func message(for index: Int) -> MessageType
+    func message(for index: Int, atBottom: Bool) -> (MessageType, Bool)
     func isMessageFromCurrentSender(_ message: MessageType) -> Bool
     func sendTextMessage(_ text: String, completion: ((String?) -> Void)?)
     func sendImage(imageData: Data, completion: ((String?) -> Void)?)
@@ -29,6 +29,8 @@ protocol ChatRoomViewModeling: BaseViewModeling {
 }
 
 class ChatRoomViewController: MessagesViewController {
+    
+    var userPicButton: UIButton?
     
     var router: ChatRoomRouting?
     var viewModel: ChatRoomViewModeling! {
@@ -41,25 +43,71 @@ class ChatRoomViewController: MessagesViewController {
         }
     }
     
+    var navbarOriginallyHidden = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+        navbarOriginallyHidden = navigationController?.navigationBar.isHidden ?? false
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        tabBarController?.tabBar.isHidden 
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+////        tabBarController?.tabBar.isHidden
+//        if navbarOriginallyHidden {
+////            navigationController?.navigationBar.isHidden = false
+//            navigationController?.setNavigationBarHidden(false, animated: true)
+//        }
+//    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        navigationController?.navigationBar.isHidden = true
+//    }
+//    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        if navbarOriginallyHidden {
+//            navigationController?.setNavigationBarHidden(true, animated: true)
+//        }
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        if navbarOriginallyHidden {
+//            navigationController?.navigationBar.isHidden = true
+//        }
+//    }
     
     private func configureUI() {
         navigationItem.setHidesBackButton(false, animated: false)
-        
+        let button = UIButton(type: .system)
+        button.size = CGSize(width: 37, height: 37)
+        NSLayoutConstraint.activate([
+            button.widthAnchor.constraint(equalToConstant: 37),
+            button.heightAnchor.constraint(equalToConstant: 37)
+        ])
+        button.layer.cornerRadius = button.size.width / 2
+        button.addTarget(self, action: #selector(onUserPicTapped), for: .touchUpInside)
+        button.setImage(UIImage(systemName: "person"), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = .blue
+        self.userPicButton = button
+        let rightItem = UIBarButtonItem(customView: button)
+        navigationItem.setRightBarButton(rightItem, animated: false)
         
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         showMessageTimestampOnSwipeLeft = true
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.locationMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.locationMessageSizeCalculator.incomingAvatarSize = .zero
+        }
         
         configureMessageInputBar()
     }
@@ -99,6 +147,12 @@ class ChatRoomViewController: MessagesViewController {
     private func updateNavBar() {
         let otherUser = viewModel.otherUser
         self.title = otherUser?.name ?? otherUser?.nickname ?? ""
+        
+        if let data = viewModel.otherUserAvatarData,
+           viewModel.otherUser?.imageUrl != nil,
+           let image = UIImage(data: data) {
+            userPicButton?.setImage(image, for: .normal)
+        }
     }
     
     @objc private func onAttachItem() {
@@ -122,7 +176,7 @@ class ChatRoomViewController: MessagesViewController {
                                          contentMode: .aspectFit,
                                          options: options) { (image, _) in
                         guard let data = image?.pngData() else {
-                            dump(image, name: "unable to get data from image")
+                            dump(image, name: "Unable to get data from image")
                             return
                         }
                         self?.viewModel.sendImage(imageData: data, completion: { errorMessage in
@@ -155,6 +209,32 @@ class ChatRoomViewController: MessagesViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.show()
     }
+    
+    @objc private func onUserPicTapped() {
+        guard let user = viewModel.otherUser else {
+            return
+        }
+        let contact = ContactModel(id: user.id,
+                                   name: user.name ?? user.nickname ?? "",
+                                   phoneNumber: user.phoneNumber ?? "NA",
+                                   avatarUrl: user.imageUrl,
+                                   isInApp: true)
+        router?.presentContactProfileViewController(contact: contact, completion: nil)
+    }
+}
+
+fileprivate extension UIScrollView {
+    var isAtBottom: Bool {
+        return contentOffset.y >= verticalOffsetForBottom
+    }
+    
+    var verticalOffsetForBottom: CGFloat {
+        let scrollViewHeight = bounds.height
+        let scrollContentSizeHeight = contentSize.height
+        let bottomInset = contentInset.bottom
+        let scrollViewBottomOffset = scrollContentSizeHeight + bottomInset - scrollViewHeight
+        return scrollViewBottomOffset
+    }
 }
 
 extension ChatRoomViewController: MessagesDataSource {
@@ -163,7 +243,14 @@ extension ChatRoomViewController: MessagesDataSource {
     }
 
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        viewModel.message(for: indexPath.section)
+        let (message, shouldScrollToBottom) = viewModel.message(for: indexPath.section,
+                                                                atBottom: messagesCollectionView.isAtBottom)
+        if shouldScrollToBottom {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                messagesCollectionView.scrollToLastItem()
+            }
+        }
+        return message
     }
 
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
@@ -221,6 +308,7 @@ extension ChatRoomViewController: InputBarAccessoryViewDelegate {
                 return
             }
             inputBar.inputTextView.text = ""
+            self?.messagesCollectionView.scrollToLastItem()
         }
     }
 }

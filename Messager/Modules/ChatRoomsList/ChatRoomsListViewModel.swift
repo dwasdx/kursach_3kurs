@@ -13,13 +13,7 @@ enum ChatRoomsSection: Hashable {
 
 class ChatRoomsListViewModel: BaseViewModel {
     
-    var currentUser: UserObject? {
-        didSet {
-            if let chats = currentUser?.chats {
-                setupChatsListener(chats: chats)
-            }
-        }
-    }
+    var currentUser: UserObject?
     
     var items: [ChatRoomModel] = []
     
@@ -49,15 +43,33 @@ class ChatRoomsListViewModel: BaseViewModel {
     let firestoreService: FirestoreChatServiceable
     let userManager: CurrentUserManaging
     
+    var userSubscriptionToken: SignalSubscriptionToken?
+    
     init(firestoreService: FirestoreChatServiceable = FirestoreService.shared,
          userManager: CurrentUserManaging = CurrentUserManager.shared) {
         self.firestoreService = firestoreService
         self.userManager = userManager
         super.init()
         
-        userManager.currentUser.signal.addListener(skipCurrent: false, skipRepeats: true) { [weak self] userObject in
+        userSubscriptionToken = userManager.currentUser.signal.addListener(skipCurrent: false, skipRepeats: true) { [weak self] userObject in
             self?.currentUser = userObject
+            
+            firestoreService.getChatRooms(chatIds: userObject?.chats ?? []) { [weak self] result in
+                switch result {
+                    case .success(let models):
+                        self?.items = models
+                        self?.items.sort()
+                        self?.didChange?()
+                        self?.setupChatsListener(chats: userObject?.chats ?? [])
+                    case .failure(let error):
+                        print(error)
+                }
+            }
         }
+    }
+    
+    deinit {
+        userManager.currentUser.signal.removeListener(userSubscriptionToken)
     }
     
     func setupChatsListener(chats: [String]) {
@@ -75,6 +87,10 @@ class ChatRoomsListViewModel: BaseViewModel {
         changes.forEach { diff in
             switch diff {
                 case .add(let model):
+                    if let index = items.firstIndex(where: { $0.chatId == model.chatId }) {
+                        items[index] = model
+                        return
+                    }
                     items.insert(model, at: 0)
                 case .changed(let model):
                     if let oldModelIndex = items.firstIndex(where: { $0.chatId == model.chatId }) {
@@ -95,5 +111,4 @@ extension ChatRoomsListViewModel: ChatRoomsListViewModeling {
     var sections: [ChatRoomsSection] {
         [.single]
     }
-    
 }

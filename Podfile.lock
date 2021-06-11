@@ -352,6 +352,11 @@ PODS:
   - PhoneNumberKit/UIKit (3.3.3):
     - PhoneNumberKit/PhoneNumberKitCore
   - PromisesObjC (1.2.11)
+  - SDWebImage (5.10.4):
+    - SDWebImage/Core (= 5.10.4)
+  - SDWebImage/Core (5.10.4)
+  - SDWebImageSwiftUI (2.0.2):
+    - SDWebImage (~> 5.10)
 
 DEPENDENCIES:
   - Firebase
@@ -361,6 +366,8 @@ DEPENDENCIES:
   - Lightbox
   - MessageKit
   - PhoneNumberKit
+  - SDWebImage
+  - SDWebImageSwiftUI
 
 SPEC REPOS:
   trunk:
@@ -389,6 +396,8 @@ SPEC REPOS:
     - nanopb
     - PhoneNumberKit
     - PromisesObjC
+    - SDWebImage
+    - SDWebImageSwiftUI
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -416,7 +425,9 @@ SPEC CHECKSUMS:
   nanopb: 1bf24dd71191072e120b83dd02d08f3da0d65e53
   PhoneNumberKit: 4ce83273551c4d2ae10b7361162f4283dd02835f
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
+  SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
+  SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
 
-PODFILE CHECKSUM: f54b1b7c7e9c6d3c4d87bb65468f535f956a7743
+PODFILE CHECKSUM: ea1c221d66ea519c2eb2e4ffd919826d9e1b8938
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

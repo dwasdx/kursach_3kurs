@@ -17,8 +17,8 @@ struct ChatRoomModel: Hashable, Codable {
     let chatId: String
     let createdBy: String
     let createdAt: TimeInterval
-    let updatedAt: TimeInterval
-    var lastMessage: ShortMessageModel
+    var updatedAt: TimeInterval
+    var lastMessage: ShortMessageModel?
     let members: [String]
     let type: Int
     

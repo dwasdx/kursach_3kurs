@@ -36,7 +36,7 @@ final class FirestoreService {
     var chatsListener: ListenerRegistration?
     var messagesListener: ListenerRegistration?
     
-    
+    var chatrooms = [ChatRoomModel]()
 //    var benches: Emitter<[BenchObject]> = Emitter([])
     
 }

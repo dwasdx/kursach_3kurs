@@ -23,8 +23,10 @@ protocol FirestoreUserServiceable {
     func addUser(_ user: UserObject, completion: @escaping SimpleErrorResponse)
     func updateUsername(userId: String, _ userName: String, completion: @escaping UserResultResponse)
     
+    func getUsersFromDatabase(userIds: [String], completion: @escaping UsersResultResponse)
     func getUserFromDataBase(userId: String, completion: @escaping UserResultResponse)
     func setUserProfileInfo(info: UserProfileModel, completion: @escaping SimpleErrorResponse)
+    func setUserObject(_ object: UserObject, completion: @escaping SimpleErrorResponse)
 }
 
 extension FirestoreService: FirestoreUserServiceable {
@@ -159,6 +161,28 @@ extension FirestoreService: FirestoreUserServiceable {
         }
     }
     
+    func getUsersFromDatabase(userIds: [String], completion: @escaping UsersResultResponse) {
+        guard userIds.count < 11 else {
+            return
+        }
+        let query = usersRef.whereField("id", in: userIds)
+        query.getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            }
+            guard let snapshot = snapshot,
+                  !snapshot.documents.isEmpty else {
+                completion(.failure(FirestoreError.userNotFound(userIds.joined(separator: "\n"))))
+                return
+            }
+            
+            let users = snapshot.documents.compactMap { snapshot in
+                try? UserObject(jsonDictionary: snapshot.data())
+            }
+            completion(.success(users))
+        }
+    }
+    
     func setUserProfileInfo(info: UserProfileModel, completion: @escaping SimpleErrorResponse) {
         authenticationService.changeName(info.name) { [weak self] (error) in
             if let error = error {
@@ -191,5 +215,10 @@ extension FirestoreService: FirestoreUserServiceable {
                 userDocument.reference.setData(json, completion: completion)
             }
         }
+    }
+    
+    func setUserObject(_ object: UserObject, completion: @escaping SimpleErrorResponse) {
+        let data = (try? object.asDictionary()) ?? [:]
+        usersRef.document(object.id).setData(data, completion: completion)
     }
 }

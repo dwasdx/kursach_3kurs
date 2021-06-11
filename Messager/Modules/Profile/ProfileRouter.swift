@@ -10,6 +10,8 @@ import SwiftUI
 
 protocol ProfileRouting: BaseRouting {
     func presentProfileViewController(_ completion: (() -> Void)?)
+    
+    func openEditProfile(userObject: UserObject)
 }
 
 class ProfileRouter: BaseRouter {
@@ -21,6 +23,18 @@ extension ProfileRouter: ProfileRouting {
         let view = ProfileViewController()
         view.router = self
         let vc = UIHostingController<ProfileViewController>(rootView: view)
+        UINavigationBar.appearance().isTranslucent = false
+        UINavigationBar.appearance().backgroundColor = .secondarySystemBackground
+        navigationController.navigationBar.isHidden = true
         navigationController.pushViewController(vc, animated: false, completion)
+    }
+    
+    func openEditProfile(userObject: UserObject) {
+        let vc = EditProfileViewController.initFromItsStoryboard()
+        let router = EditProfileRouter()
+        router.viewController = vc
+        vc.router = router
+        vc.viewModel = EditProfileViewModel(userObject: userObject)
+        navigationController.pushViewController(vc, animated: true)
     }
 }

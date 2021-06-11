@@ -22,6 +22,7 @@ struct UserObject: Codable {
     var isFilled: Bool {
         name != nil && nickname != nil
     }
+    var avatarData: Data?
     
     enum CodingKeys: CodingKey {
         case id, name, nickname, email, userInfo, phoneNumber, imageUrl, chats

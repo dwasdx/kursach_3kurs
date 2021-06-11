@@ -41,20 +41,7 @@ class ChatRoomViewModel: BaseViewModel {
         }
     }
     
-    private var messages: [MessageType] = [
-//        Message(sender: SenderUser(senderId: "user1", displayName: "user1"),
-//                messageId: UUID().uuidString,
-//                sentDate: Date().adding(.second, value: -10),
-//                kind: .text("message1")),
-//        Message(sender: SenderUser(senderId: "user2", displayName: "user2"),
-//                messageId: UUID().uuidString,
-//                sentDate: Date().adding(.second, value: -25),
-//                kind: .text("message2")),
-//        Message(sender: SenderUser(senderId: "user1", displayName: "user1"),
-//                messageId: UUID().uuidString,
-//                sentDate: Date().adding(.second, value: -1),
-//                kind: .text("message3"))
-    ]
+    private var messages: [MessageType] = []
     
     private let chatService: FirestoreChatServiceable
     private let userManager: CurrentUserManaging
@@ -70,14 +57,6 @@ class ChatRoomViewModel: BaseViewModel {
         self.storageService = storageService
         super.init()
         messages = []
-        chatService.setupChatMessagesListener(chatId: room.chatId) { [weak self] result in
-            switch result {
-                case .success(let diff):
-                    self?.processMessageDiff(diff)
-                case .failure(let error):
-                    print(error)
-            }
-        }
         guard let currentUserId = userManager.currentUser.value?.id,
               let otherUserId = room.members.first(where: { $0 != currentUserId }) else {
             return
@@ -86,10 +65,22 @@ class ChatRoomViewModel: BaseViewModel {
             switch result {
                 case .success(let user):
                     self?.otherUser = user
+                    chatService.setupChatMessagesListener(chatId: room.chatId) { [weak self] result in
+                        switch result {
+                            case .success(let diff):
+                                DispatchQueue.global().async {
+                                    self?.processMessageDiff(diff)
+                                }
+                            case .failure(let error):
+                                print(error)
+                        }
+                    }
                 case .failure(let error):
                     print(error)
             }
         }
+        
+        
         storageService.downloadUserAvatar(userId: otherUserId) { [weak self] result in
             switch result {
                 case .success(let data):
@@ -131,11 +122,19 @@ class ChatRoomViewModel: BaseViewModel {
     }
     
     private func replaceExistingMessage(_ message: MessageModel, oldIndex: Array<MessageModel>.Index) {
-        
+        print("\(#function) is not implemented")
     }
     
     private func insertNewMessage(_ message: MessageModel) {
-        var displayModel = MessageDisplayModel(sender: SenderUser(senderId: message.sentBy, displayName: otherUser?.name ?? otherUser?.nickname ?? "?"),
+        var name = ""
+        if message.sentBy == otherUser?.id {
+            name = otherUser?.name ?? otherUser?.nickname ?? "?"
+        } else {
+            let currentUser = userManager.currentUser.value
+            name = currentUser?.name ?? currentUser?.nickname ?? "?"
+        }
+        var displayModel = MessageDisplayModel(sender: SenderUser(senderId: message.sentBy,
+                                                                  displayName: name),
                                                messageId: message.messageId,
                                                sentDate: Date(timeIntervalSince1970: message.sentAt),
                                                kind: .text(""))
@@ -179,8 +178,11 @@ extension ChatRoomViewModel: ChatRoomViewModeling {
         messages.count
     }
     
-    func message(for index: Int) -> MessageType {
-        messages[index]
+    func message(for index: Int, atBottom: Bool) -> (MessageType, Bool) {
+        let message = messages[index]
+        let isLatestMessage = index == messages.count - 1
+        let shouldScrollToBottom = atBottom && isLatestMessage
+        return (message, shouldScrollToBottom)
     }
     
     func isMessageFromCurrentSender(_ message: MessageType) -> Bool {

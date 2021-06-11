@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol PersistantStoreUserServiceable: class {
+protocol PersistantStoreUserServiceable: AnyObject {
     var userObject: UserObject? { get set }
 }
 

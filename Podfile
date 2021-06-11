@@ -11,6 +11,8 @@ target 'Messager' do
   pod 'PhoneNumberKit'
   pod 'MessageKit'
   pod 'Lightbox'
+  pod 'SDWebImage'
+  pod 'SDWebImageSwiftUI'
   # Pods for Messager
 
 end
