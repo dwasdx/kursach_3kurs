@@ -11,7 +11,6 @@ import PhoneNumberKit
 protocol AuthenticationRouting {
     func openContinueAsScreen(withObject: Any?)
     func openLoginScreen()
-    func openSignUpScreen()
 }
 
 protocol AuthenticationViewModeling: BaseViewModeling {
